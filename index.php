@@ -6,7 +6,7 @@
 	$sql = "SHOW TABLES";
 	$result = mysql_query($sql);
 	$num_of_tables = mysql_num_rows($result);  
-	if(!$select || $num_of_tables == 0) {
+	if($num_of_tables == 0) {
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
