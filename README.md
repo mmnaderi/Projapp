@@ -2,7 +2,7 @@ Projapp
 =======
 The Project Management
 
-<div align="center" width="100%">« In the name of Allah »</div>
+« In the name of Allah »
 ### Introduction
 Projapp is a web application that you can use it for show your portfolio & projects. With this application you can publish your free & premium products and you can show status of your projects progress to other people.
 
