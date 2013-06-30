@@ -1,7 +1,10 @@
 <?php
-	##########################
-	## In The Name Of Allah ##
-	##########################
+	######### IN THE NAME OF ALLAH ##########
+	## Project Name: Projapp               ##
+	## File name:    index.php             ##
+	## Author:       Mohammad Mahdi Naderi ##
+	## Project Site: projapp.mmnaderi.ir   ##
+	#########################################
 	include ('config.php');
 	$sql = "SHOW TABLES";
 	$result = mysql_query($sql);

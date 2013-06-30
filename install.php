@@ -1,9 +1,8 @@
 <?php
 	######### IN THE NAME OF ALLAH ##########
 	## Project Name: Projapp               ##
-	## File name:    index.php             ##
+	## File name:    install.php           ##
 	## Author:       Mohammad Mahdi Naderi ##
-	## Created:      6/29/2013             ##
 	## Project Site: projapp.mmnaderi.ir   ##
 	#########################################
 	include('admin/../config.php');

@@ -1,7 +1,10 @@
 <?php
-	##########################
-	## In The Name Of Allah ##
-	##########################
+	######### IN THE NAME OF ALLAH ##########
+	## Project Name: Projapp               ##
+	## File name:    addproject.php        ##
+	## Author:       Mohammad Mahdi Naderi ##
+	## Project Site: projapp.mmnaderi.ir   ##
+	#########################################
 	ob_start();
 	@session_start();
 	if(isset($_SESSION['admin'])) {

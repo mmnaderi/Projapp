@@ -1,3 +1,11 @@
+<?php
+	######### IN THE NAME OF ALLAH ##########
+	## Project Name: Projapp               ##
+	## File name:    toolbar.php           ##
+	## Author:       Mohammad Mahdi Naderi ##
+	## Project Site: projapp.mmnaderi.ir   ##
+	#########################################
+?>
 <ul class="toolbar">
 					<li><a href="<?php echo($info['url']); ?>/admin"><img src="images/toolbar/dashboard.png" alt="Dashboard" /><span class="tooltip">Dashboard</span></a></li>
 					<li><a href="<?php echo($info['url']); ?>/admin/addproject.php"><img src="images/toolbar/addproject.png" alt="New Project" /><span class="tooltip">New Project</span></a></li>
