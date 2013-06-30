@@ -5,15 +5,6 @@
 	## Author:       Mohammad Mahdi Naderi ##
 	## Project Site: projapp.mmnaderi.ir   ##
 	#########################################
-	function start_project() {
-return <<<"END"
-$empty_category = mysql_result(mysql_query("SELECT * FROM `projects` WHERE `category`='{$categories["name"]}'"), 0);
-if (!$empty_category) { echo('<span>there isn\'t any project on this category.</span>'); }
-$projects_query = mysql_query("SELECT * FROM `projects` WHERE `category`='{$categories["name"]}'");
-while($projects = mysql_fetch_array($projects_query)) {
-}
-END;
-	}
 	include ('config.php');
 	$sql = "SHOW TABLES";
 	$result = mysql_query($sql);
