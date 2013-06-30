@@ -3,7 +3,7 @@
 	## Project Name: Projapp               ##
 	## File name:    index.php             ##
 	## Author:       Mohammad Mahdi Naderi ##
-	## Created:      1/28/10 | 5:35 PM     ##
+	## Created:      6/29/2013             ##
 	## Project Site: projapp.mmnaderi.ir   ##
 	#########################################
 	include('admin/../config.php');
