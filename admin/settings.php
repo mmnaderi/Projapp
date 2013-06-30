@@ -9,9 +9,8 @@
 	@session_start();
 	if(isset($_SESSION['admin'])) {
 	include ('../config.php');
-	//$abc = mysql_query ("INSERT INTO `info` (`id`,`url`,`adminurl`) VALUES ('', 'http://localhost/projapp','http://localhost/projapp/admin')");
-	if ($_POST['developer_name'] != '' && $_POST['developer_mail'] != '') {
-		$updateinfo = mysql_query ("UPDATE `info` SET `username`='".$_POST['username']."', `password`='".$_POST['password']."',`developername`='".$_POST['developer_name']."', `developermail`='". $_POST['developer_mail'] ."' WHERE `id`='1'");
+	if (isset($_POST['developer_name']) && $_POST['developer_name'] != '' || isset($_POST['developer_mail']) && $_POST['developer_mail'] != '') {
+		$updateinfo = mysql_query ("UPDATE `info` SET `username`='".$_POST['username']."', `password`='".$_POST['password']."',`developername`='".$_POST['developer_name']."', `developermail`='". $_POST['developer_mail'] ."', `theme`='". $_POST['theme'] ."' WHERE `id`='1'");
 	}
 	$query = mysql_query("SELECT * FROM `info`");
 	while($info = mysql_fetch_array($query)) {
@@ -42,6 +41,25 @@
 						<hr color="#CCC" />
 						<p class="part">Developer Name: <input type="text" name="developer_name" value="<?php echo($info['developername']); ?>" /></p>
 						<p class="part">Developer E-Mail: <input type="text" name="developer_mail" value="<?php echo($info['developermail']); ?>" /></p>
+						<hr color="#CCC" />
+						<p class="part">Theme: 
+						<select name="theme">
+						<?php
+							$path = '../themes/';
+							$results = scandir($path);
+							foreach ($results as $result) {
+								if ($result === '.' or $result === '..') continue;
+								if (is_dir($path . '/' . $result)) {
+									if($result == $info['theme']) {
+										echo("<option selected=\"selected\" value=\"$result\">$result</option>");
+									}
+									else {
+										echo("<option value=\"$result\">$result</option>");
+									}
+								}
+							}
+						?>
+						</select>
 						<input type="hidden" name="request" value="true" />
 						<div class="submit-project"><input type="submit" value="Edit Settings »" /></div>
 					</form>

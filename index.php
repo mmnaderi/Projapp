@@ -5,10 +5,19 @@
 	## Author:       Mohammad Mahdi Naderi ##
 	## Project Site: projapp.mmnaderi.ir   ##
 	#########################################
+	function start_project() {
+return <<<"END"
+$empty_category = mysql_result(mysql_query("SELECT * FROM `projects` WHERE `category`='{$categories["name"]}'"), 0);
+if (!$empty_category) { echo('<span>there isn\'t any project on this category.</span>'); }
+$projects_query = mysql_query("SELECT * FROM `projects` WHERE `category`='{$categories["name"]}'");
+while($projects = mysql_fetch_array($projects_query)) {
+}
+END;
+	}
 	include ('config.php');
 	$sql = "SHOW TABLES";
 	$result = mysql_query($sql);
-	$num_of_tables = mysql_num_rows($result);  
+	$num_of_tables = mysql_num_rows($result);
 	if($num_of_tables == 0) {
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,19 +40,9 @@
 		$url = $info['url'];
 		$developermail=$info['developermail'];
 		$developername=$info['developername'];
+		$themeurl = 'themes/'.$info['theme'];
 ?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-	<head>
-		<title><?php echo($developername); ?>'s projects</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link href="admin/favicon.ico" rel="shortcut icon">
-		<link href="admin/style.css" rel="stylesheet" type="text/css">
-	</head>
-	<body>
-		<div class="container wrapper">
-		<h1 class="page-title"><font size="5">{</font><?php echo($developername); ?>'s Projects}</h1>
-		<ul class="projects">
+<?php include($themeurl.'/header.pt'); ?>
 <?php
 	}
 	mysql_close($connect);
@@ -93,10 +92,6 @@
 					}
 				?></div>
 			</li>
+<?php include($themeurl.'/footer.pt'); ?>
 			<?php } } ?>
-		</ul>
-		<div align="right" class="copyright">Powered by <a href="http://projapp.mmnaderi.ir" title="Projapp">Projapp</a></div>
-		</div>
-	</body>
-</html>
 <?php } ?>

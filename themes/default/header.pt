@@ -1,0 +1,12 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title><?php echo($developername); ?>'s projects</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link href="admin/favicon.ico" rel="shortcut icon">
+		<link href="admin/style.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<div class="container wrapper">
+		<h1 class="page-title"><font size="5">{</font><?php echo($developername); ?>'s Projects}</h1>
+		<ul class="projects">
