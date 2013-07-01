@@ -50,32 +50,16 @@
 							$rows = mysql_result(mysql_query("SELECT COUNT(*) FROM `categories`"), 0);
 							if (!$rows) { echo("<p>you don't have any categories. :(</p>"); }
 							//////////////////////////////////////////////////////////////
-							while($projects = mysql_fetch_array($projects_query)) {
+							while($categories = mysql_fetch_array($projects_query)) {
+							if($categories['name'] != 'Without Category') {
 						?>
 						<li>
 							<span class="name"><?php
 								echo($counter);
 								$counter=$counter+1;
-							?>. <?php echo($projects['name']); ?></span>
-							<div class="edit"><a href="editproject.php?id=<?php echo($projects['id']); ?>"><img src="images/edit.png" alt="Edit Project" /></a></div>
-							<div class="percent"><?php
-								if ($projects['percent'] == 100) {
-									echo('<img src="images/complete.png" alt="Complete" title="Complete" />');
-								}
-								else {
-									echo('<img src="images/indevelope.png" alt="In Develope" title="In Develope" />');
-								}
-							?><div class="percent-text"><?php echo($projects['percent']); ?>%</div></div>
-							<div class="type"><?php
-								if ($projects['type'] == 'download') {
-									echo('<a href="'. $projects['file'] .'"><img src="images/download.png" alt="For Download" title="For Download" /></a>');
-								}
-								else {
-									echo('<a href="'. $projects['file'] .'"><img src="images/sale.png" alt="For Sale" title="For Sale" /></a>');
-								}
-							?></div>
+							?>. <?php echo($categories['name']); ?></span>
 						</li>
-						<?php } ?>
+						<?php } } ?>
 							<form action="categories.php" method="POST">
 							<input type="hidden" name="request" value="true" />
 							<p class="part">Category Name: <input type="text" name="category_name" /><input class="submit-category" type="submit" value="Add Category »" /></p>

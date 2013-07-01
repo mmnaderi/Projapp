@@ -29,24 +29,25 @@
 					<h1 class="page-title"><font size="5">{</font>Projects List}</h1>
 					<ul class="projects">
 					<?php
-							}
-							mysql_close($connect);
-							include ('../config.php');
-							$counter = 1;
-							//////////////////////////////////////////////////////////////
-							$rows = mysql_result(mysql_query("SELECT COUNT(*) FROM `projects`"), 0);
-							if (!$rows) { echo("you don't have any project. :("); }
-							//////////////////////////////////////////////////////////////
-							$categories_query = mysql_query("SELECT * FROM `categories`");
-							while($categories = mysql_fetch_array($categories_query)) {
-						?>
-						<h2 class="category-title"><?php echo($categories['name']); ?></h2>
-						<?php
-							$empty_category = mysql_result(mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'"), 0);
-							if (!$empty_category) { echo('<span class="note">there isn\'t any project on this category.</span>'); }
-							$projects_query = mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'");
-							while($projects = mysql_fetch_array($projects_query)) {
-						?>
+						}
+						mysql_close($connect);
+						include ('../config.php');
+						$counter = 1;
+						//////////////////////////////////////////////////////////////
+						$rows = mysql_result(mysql_query("SELECT COUNT(*) FROM `projects`"), 0);
+						if (!$rows) { echo("you don't have any project. :("); }
+						//////////////////////////////////////////////////////////////
+						$categories_query = mysql_query("SELECT * FROM `categories`");
+						while($categories = mysql_fetch_array($categories_query)) {
+						if($categories['name'] != 'Without Category') {
+							echo('<h2 class="category-title">'.$categories['name'].'</h2>');
+						}
+						
+						$empty_category = mysql_result(mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'"), 0);
+						if (!$empty_category && $categories['name'] != 'Without Category') { echo('<span class="note">there isn\'t any project on this category.</span>'); }
+						$projects_query = mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'");
+						while($projects = mysql_fetch_array($projects_query)) {
+					?>
 						<li>
 							<span class="name"><?php
 								/*echo($counter);

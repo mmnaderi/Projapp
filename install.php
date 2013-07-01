@@ -31,6 +31,7 @@
 			'`language` TEXT NOT NULL, '.
 			'PRIMARY KEY(id))');
 		$insertinfo = mysql_query ("INSERT INTO `info` (`id`,`url`,`username`,`password`,`developername`,`developermail`,`theme`,`language`) VALUES ('', 'http://".dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'])."','".$_POST['username']."','".$_POST['password']."','".$_POST['developer_name']."','".$_POST['developer_mail']."','".$_POST['theme']."','".$_POST['language']."')");
+		$insertcategory = mysql_query ("INSERT INTO `categories` (`id`,`name`) VALUES ('','Without Category')");
 	}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -48,7 +49,7 @@
 				<h1 class="page-title"><font size="5">{</font>Install Projapp}</h1>
 				<form action="install.php" method="POST">
 					<?php
-						if (isset($insertinfo) || mysql_query("SELECT * FROM `info`") && mysql_query("SELECT * FROM `projects`")) {
+						if (isset($insertinfo) && isset($insertcategory) && mysql_query("SELECT * FROM `info`") && mysql_query("SELECT * FROM `projects`") && mysql_query("SELECT * FROM `categories`")) {
 					?>
 					<p><img src="admin/images/complete.png" alt="Complete" /><font color="green"> Fantastic! Prpjapp is install successfully.</font></p>
 					<p>you can go to <a href="index.php" title="Home page">Home page</a> or your <a href="admin" title="Admin panel">Admin panel</a>.</p>

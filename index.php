@@ -21,15 +21,17 @@
 	$rows = mysql_result(mysql_query("SELECT COUNT(*) FROM `projects`"), 0);
 	if(!$rows) { echo($info['developername']." doesn't have any project. :("); }
 	
-	$counter = 1;
 	// start categories
 	$categories_query = mysql_query("SELECT * FROM `categories`");
 	while($categories = mysql_fetch_array($categories_query)) {
-	echo('<h2 class="category-title">'.$categories['name'].'</h2>');
+	$counter = 1;
+	if($categories['name'] != 'Without Category') {
+		echo('<h2 class="category-title">'.$categories['name'].'</h2>');
+	}
 	
 	// start projects in any categories
 	$empty_category = mysql_result(mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'"), 0);
-	if (!$empty_category) { echo('<span class="note">there isn\'t any project on this category.</span>'); }
+	if (!$empty_category && $categories['name'] != 'Without Category') { echo('<span class="note">there isn\'t any project on this category.</span>'); }
 	$projects_query = mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'");
 	while($projects = mysql_fetch_array($projects_query)) {
 ?>
@@ -63,5 +65,5 @@
 					}
 				?></div>
 			</li>
-<?php include($themeurl.'/footer.pt'); ?>
 <?php } } ?>
+<?php include($themeurl.'/footer.pt'); ?>
