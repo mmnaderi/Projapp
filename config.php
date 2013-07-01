@@ -7,10 +7,10 @@
 	#########################################
 	$dbhost = 'localhost';
 	$dbuser = 'root';
-	$dbpass = 'pass';
+	$dbpass = '';
 	$dbname = 'projapp';
 	/////////////////////////
-	error_reporting(E_ERROR);
+	error_reporting(0);
 	$connect = mysql_connect($dbhost,$dbuser,$dbpass);
 	$select = mysql_select_db($dbname,$connect);
 ?>

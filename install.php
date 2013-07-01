@@ -6,7 +6,7 @@
 	## Project Site: projapp.mmnaderi.ir   ##
 	#########################################
 	include('admin/../config.php');
-	if ($_POST['developer_name'] != '' && $_POST['developer_mail'] != '') {
+	if (isset($_POST['developer_name']) && $_POST['developer_name'] != '' && isset($_POST['developer_mail']) && $_POST['developer_mail'] != '') {
 		mysql_query ('CREATE TABLE projects( '.
 			'`id` INT NOT NULL AUTO_INCREMENT,'.
 			'`name` TEXT NOT NULL, '.
@@ -28,8 +28,9 @@
 			'`developername` TEXT NOT NULL, '.
 			'`developermail` TEXT NOT NULL, '.
 			'`theme` TEXT NOT NULL, '.
+			'`language` TEXT NOT NULL, '.
 			'PRIMARY KEY(id))');
-		$insertinfo = mysql_query ("INSERT INTO `info` (`id`,`url`,`username`,`password`,`developername`,`developermail`,`theme`) VALUES ('', 'http://".dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'])."','".$_POST['username']."','".$_POST['password']."','".$_POST['developer_name']."','".$_POST['developer_mail']."','default')");
+		$insertinfo = mysql_query ("INSERT INTO `info` (`id`,`url`,`username`,`password`,`developername`,`developermail`,`theme`,`language`) VALUES ('', 'http://".dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'])."','".$_POST['username']."','".$_POST['password']."','".$_POST['developer_name']."','".$_POST['developer_mail']."','".$_POST['theme']."','".$_POST['language']."')");
 	}
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -64,6 +65,42 @@
 					<hr color="#CCC" />
 					<p class="part">Developer Name: <input type="text" name="developer_name" /></p>
 					<p class="part">Developer E-Mail: <input type="text" name="developer_mail" /></p>
+					<hr color="#CCC" />
+					<p class="part">Language: 
+					<select name="language">
+					<?php
+					foreach (glob("languages/*.pl") as $filename) {
+						$filename = str_replace("languages/","",$filename);
+						$filename = str_replace(".pl","",$filename);
+						if($filename == 'en_US') {
+							echo "<option selected=\"selected\">{$filename}</option>";
+						}
+						else {
+							echo "<option>{$filename}</option>";
+						}
+					}
+					?>
+					</select>
+					</p>
+					<p class="part">Theme: 
+					<select name="theme">
+						<?php
+							$path = 'themes/';
+							$results = scandir($path);
+							foreach ($results as $result) {
+								if ($result === '.' or $result === '..') continue;
+								if (is_dir($path . '/' . $result)) {
+									if($result == 'default') {
+										echo("<option selected=\"selected\" value=\"{$result}\">{$result}</option>");
+									}
+									else {
+										echo("<option value=\"{$result}\">{$result}</option>");
+									}
+								}
+							}
+						?>
+					</select>
+					</p>
 					<input type="hidden" name="request" value="true" />
 					<div class="submit-project"><input type="submit" value="Install Projapp »" /></div>
 					<?php } else { ?>

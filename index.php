@@ -5,49 +5,29 @@
 	## Author:       Mohammad Mahdi Naderi ##
 	## Project Site: projapp.mmnaderi.ir   ##
 	#########################################
-	include ('config.php');
-	$sql = "SHOW TABLES";
-	$result = mysql_query($sql);
-	$num_of_tables = mysql_num_rows($result);
-	if($num_of_tables == 0) {
-?>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-	<head>
-		<title>Not Installed</title>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<link href="admin/favicon.ico" rel="shortcut icon">
-		<link href="admin/style.css" rel="stylesheet" type="text/css">
-	</head>
-	<body>
-	<div class="container wrapper">Please go to <a href="install.php">install page</a>.</div>
-	</body>
-</html>
-<?php
+	include('config.php');
+	include('libraries.php');
+	
+	// check if Projapp not installed (in database isn't any table)
+	if(mysql_num_rows(mysql_query("SHOW TABLES")) == 0) {
+		echo($not_installed);
+		exit;
 	}
-	else {
-	$query = mysql_query("SELECT * FROM `info`");
-	while($info = mysql_fetch_array($query)) {
-		$url = $info['url'];
-		$developermail=$info['developermail'];
-		$developername=$info['developername'];
-		$themeurl = 'themes/'.$info['theme'];
-?>
-<?php include($themeurl.'/header.pt'); ?>
-<?php
-	}
-	mysql_close($connect);
-	include ('config.php');
-	$counter = 1;
-	//////////////////////////////////////////////////////////////
+	
+	// include header of theme
+	include($themeurl.'/header.pt');
+	
+	// check if developer doesn't have any project
 	$rows = mysql_result(mysql_query("SELECT COUNT(*) FROM `projects`"), 0);
-	if (!$rows) { echo("you don't have any project. :("); }
-	//////////////////////////////////////////////////////////////
+	if(!$rows) { echo($info['developername']." doesn't have any project. :("); }
+	
+	$counter = 1;
+	// start categories
 	$categories_query = mysql_query("SELECT * FROM `categories`");
 	while($categories = mysql_fetch_array($categories_query)) {
-?>
-			<h2 class="category-title"><?php echo($categories['name']); ?></h2>
-<?php
+	echo('<h2 class="category-title">'.$categories['name'].'</h2>');
+	
+	// start projects in any categories
 	$empty_category = mysql_result(mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'"), 0);
 	if (!$empty_category) { echo('<span class="note">there isn\'t any project on this category.</span>'); }
 	$projects_query = mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'");
@@ -71,7 +51,7 @@
 				</div>
 				<div class="type"><?php
 					if ($projects['type'] == 'download') {
-						if($projects['file'] == $url.'/projects/') {
+						if($projects['file'] == $info['url'].'/projects/') {
 							echo('<img src="admin/images/download.png" alt="For Download" title="For Download" />');
 						}
 						else {
@@ -84,5 +64,4 @@
 				?></div>
 			</li>
 <?php include($themeurl.'/footer.pt'); ?>
-			<?php } } ?>
-<?php } ?>
+<?php } } ?>

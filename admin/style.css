@@ -38,6 +38,9 @@ input[type="text"], input[type="submit"], input[type="password"], textarea, sele
 	font-family:Tahoma;
 	color:#161616;
 }
+select option {
+	padding-right:15px;
+}
 a.button {
 	padding:5px;
 	text-shadow:none;
@@ -117,9 +120,6 @@ h2 {
 }
 h2.category-title {
 	margin-top:15px;
-}
-ul.projects {
-	margin-top:-20px;
 }
 ul.projects li {
 	color:#444;
