@@ -24,10 +24,10 @@
 		if ($_POST['project_name'] != '' && $_POST['project_description'] != '' && $_POST['progress_level'] != '') {
 			$addproject = mysql_query ("INSERT INTO `projects` (`id`,`name`,`description`,`type`,`percent`,`file`,`category`) VALUES ('', '". $_POST['project_name'] ."','". $_POST['project_description'] ."','". $_POST['project_type'] ."','". $_POST['progress_level'] ."','". $info['url'] ."/projects/". $_FILES['file']['name'] ."','". $_POST['project_category'] ."')");
 			if(isset($_POST['project_type']) && $_POST['project_type'] == 'download') {
-				$target_path = "../projects/";
+				$target_path = "../public/";
 			}
 			else {
-				$target_path = "../premium/";
+				$target_path = "../private/";
 			}
 			$target_path = $target_path . basename( $_FILES['file']['name']); 
 

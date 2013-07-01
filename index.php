@@ -53,7 +53,7 @@
 				</div>
 				<div class="type"><?php
 					if ($projects['type'] == 'download') {
-						if($projects['file'] == $info['url'].'/projects/') {
+						if($projects['file'] == $info['url'].'/public/') {
 							echo('<img src="admin/images/download.png" alt="For Download" title="For Download" />');
 						}
 						else {
