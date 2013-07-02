@@ -10,7 +10,12 @@
 	if(isset($_SESSION['admin'])) {
 	include ('../config.php');
 	if (isset($_POST['developer_name']) && $_POST['developer_name'] != '' || isset($_POST['developer_mail']) && $_POST['developer_mail'] != '') {
-		$updateinfo = mysql_query ("UPDATE `info` SET `username`='".$_POST['username']."', `password`='".$_POST['password']."',`developername`='".$_POST['developer_name']."', `developermail`='". $_POST['developer_mail'] ."', `theme`='". $_POST['theme'] ."', `language`='". $_POST['language'] ."' WHERE `id`='1'");
+		if(isset($_POST['password']) && $_POST['password'] != '') {
+			$updateinfo = mysql_query ("UPDATE `info` SET `username`='".$_POST['username']."', `password`='".$_POST['password']."',`developername`='".$_POST['developer_name']."', `developermail`='". $_POST['developer_mail'] ."', `theme`='". $_POST['theme'] ."', `language`='". $_POST['language'] ."' WHERE `id`='1'");
+		}
+		else {
+			$updateinfo = mysql_query ("UPDATE `info` SET `username`='".$_POST['username']."', `developername`='".$_POST['developer_name']."', `developermail`='". $_POST['developer_mail'] ."', `theme`='". $_POST['theme'] ."', `language`='". $_POST['language'] ."' WHERE `id`='1'");
+		}
 	}
 	$query = mysql_query("SELECT * FROM `info`");
 	while($info = mysql_fetch_array($query)) {
@@ -22,6 +27,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link href="favicon.ico" rel="shortcut icon">
 		<link href="style.css" rel="stylesheet" type="text/css">
+		<script src="js/jquery-1.10.1.min.js"></script>
+		<script src="js/scripts.js"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -37,26 +44,29 @@
 						<p><img src="images/error.png" alt="Error" /><font color="red"> Unfortunately There is an error to edit settings.</font></p>
 						<?php } ?>
 						<p class="part">Username: <input type="text" name="username" value="<?php echo($info['username']); ?>" /></p>
-						<p class="part">Password: <input type="password" name="password" value="<?php echo($info['password']); ?>" /></p>
+						<p class="part">Password: <input type="password" name="password" value="" /></p>
 						<hr color="#CCC" />
 						<p class="part">Developer Name: <input type="text" name="developer_name" value="<?php echo($info['developername']); ?>" /></p>
 						<p class="part">Developer E-Mail: <input type="text" name="developer_mail" value="<?php echo($info['developermail']); ?>" /></p>
-						<hr color="#CCC" />
+						<hr color="#CCC" /><br/>
+						<span class="note">please select a rtl language with rtl theme or select ltr language with ltr theme.</span>
 						<p class="part">Language: 
 						<select name="language">
 						<?php
 						foreach (glob("../languages/*.pl") as $filename) {
-							$filename = str_replace("languages/","",$filename);
+							$filename = str_replace("../languages/","",$filename);
 							$filename = str_replace(".pl","",$filename);
-							if($filename == 'en_US') {
-								echo "<option selected=\"selected\">{$filename}</option>";
+							include("../languages/{$filename}.pl");
+							if($filename == $info['language']) {
+								echo "<option value=\"{$filename}\" selected=\"selected\">{$filename} [{$direction}]</option>";
 							}
 							else {
-								echo "<option>{$filename}</option>";
+								echo "<option value=\"{$filename}\">{$filename} [{$direction}]</option>";
 							}
 						}
 						?>
 						</select>
+						<span id="message"></span>
 						</p>
 						<p class="part">Theme: 
 						<select name="theme">
@@ -66,11 +76,12 @@
 							foreach ($results as $result) {
 								if ($result === '.' or $result === '..') continue;
 								if (is_dir($path . '/' . $result)) {
+									include("../themes/{$result}/info.pt");
 									if($result == $info['theme']) {
-										echo("<option selected=\"selected\" value=\"{$result}\">{$result}</option>");
+										echo("<option selected=\"selected\" value=\"{$result}\">{$result} [{$theme_direction}]</option>");
 									}
 									else {
-										echo("<option value=\"{$result}\">{$result}</option>");
+										echo("<option value=\"{$result}\">{$result} [{$theme_direction}]</option>");
 									}
 								}
 							}

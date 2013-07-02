@@ -22,20 +22,25 @@
 	/////////////////////////////////////////////////////////////////////
 	if (isset($_POST['request']) && $_POST['request'] == 'true') {
 		if ($_POST['project_name'] != '' && $_POST['project_description'] != '' && $_POST['progress_level'] != '') {
-			$addproject = mysql_query ("INSERT INTO `projects` (`id`,`name`,`description`,`type`,`percent`,`file`,`category`) VALUES ('', '". $_POST['project_name'] ."','". $_POST['project_description'] ."','". $_POST['project_type'] ."','". $_POST['progress_level'] ."','". $info['url'] ."/projects/". $_FILES['file']['name'] ."','". $_POST['project_category'] ."')");
-			if(isset($_POST['project_type']) && $_POST['project_type'] == 'download') {
+			if($_POST['progress_level'] > 100 || $_POST['progress_level'] < 0) {
+				$message = "Please enter progress level between 0 and 100.";
+			}
+			else {
+			$addproject = mysql_query ("INSERT INTO `projects` (`id`,`name`,`description`,`type`,`percent`,`file`,`category`) VALUES ('', '". $_POST['project_name'] ."','". $_POST['project_description'] ."','". $_POST['project_type'] ."','". $_POST['progress_level'] ."','".$_FILES['file']['name']."','". $_POST['project_category'] ."')");
+			if(isset($_POST['project_type']) && $_POST['project_type'] == 'public') {
 				$target_path = "../public/";
 			}
 			else {
 				$target_path = "../private/";
 			}
-			$target_path = $target_path . basename( $_FILES['file']['name']); 
+			$target_path = $target_path . basename( $_FILES['file']['name']);
 
 			if (move_uploaded_file($_FILES['file']['tmp_name'], $target_path)) {
 				$uploadfile = 1;
 			}
 			else {
 				$uploadfile = 0;
+			}
 			}
 		}
 	}
@@ -55,6 +60,9 @@
 				<?php require('toolbar.php'); ?>
 				<div class="primery">
 					<h1 class="page-title"><font size="5">{</font>Add New Project}</h1>
+					<?php if(isset($message) && $message != '') { ?>
+					<p><img src="images/error.png" alt="Error" /><font color="red"> <?php echo($message); ?></font></p>
+					<?php } ?>
 					<?php if(isset($addproject) && $addproject) {?>
 					<p><img src="images/complete.png" alt="Complete" /><font color="green"> Perfect! project was added.</font></p>
 					<?php } elseif (isset($_POST['request']) && $_POST['request'] == 'true') {?>
@@ -66,18 +74,41 @@
 							<p class="part">Project Description:</p><textarea class="project-description" name="project_description"></textarea>
 						</div>
 						<div class="left">
+							<a class="help">
+							<span class="tooltip-right">
+								<p>Enter number of progress level of your project. (between 0 and 100)</p>
+							</span>
+							</a>
 							<p class="part">Progress Level: <input type="text" name="progress_level" /></p>
+							<a class="help">
+							<span class="tooltip-right">
+								<p><strong>Public</strong><br/>Everyone can download your project file</p>
+								<p><strong>Private</strong><br/>People can't download or buy your project</p>
+								<p><strong>Sale</strong><br/>People can buy your project</p>
+							</span>
+							</a>
 							<p class="part">Project Type:
 								<select class="project-type" name="project_type">
-									<option value="sale">For Sale</option>
-									<option value="download">For Download</option>
+								<option value="public">Public</option>
+								<option value="private">Private</option>
+								<option value="sale">Sale</option>
 								</select>
 							</p>
+							<a class="help">
+							<span class="tooltip-right">
+								<p>Enter the category of your project. If your project doesn't have any category select 'Without Category'</p>
+							</span>
+							</a>
 							<p class="part">Project Category:
 								<select class="project-category" name="project_category">
 									<?php get_categories(); ?>
 								</select>
 							</p>
+							<a class="help">
+							<span class="tooltip-right">
+								<p>Select your project file. Less than <?php echo(ini_get('upload_max_filesize')); ?> on this Server.</p>
+							</span>
+							</a>
 						<p class="part">Project File:</p><input name="file" type="file" /><br />
 						</div>
 						<input type="hidden" name="request" value="true" />

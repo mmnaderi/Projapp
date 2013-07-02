@@ -13,10 +13,8 @@
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
 	if (isset($_POST['request']) && $_POST['request'] == 'true') {
-		if ($_POST['username'] == $info['username'] && $_POST['password'] == $info['password']) {
-			if($_SESSION['admin'] = $_POST['username']) {
-			echo('asd');
-			}
+		if ($_POST['username'] == $info['username'] && md5($_POST['password']) == $info['password']) {
+			$_SESSION['admin'] = $_POST['username'];
 		}
 	}
 	if(isset($_GET['act']) && $_GET['act'] == 'exit') {

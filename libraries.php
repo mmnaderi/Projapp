@@ -21,4 +21,6 @@
 	<div class="container wrapper">Please go to <a href="install.php">install page</a>.</div>
 	</body>
 </html>';
+
+	
 ?>

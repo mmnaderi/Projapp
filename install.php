@@ -5,7 +5,11 @@
 	## Author:       Mohammad Mahdi Naderi ##
 	## Project Site: projapp.mmnaderi.ir   ##
 	#########################################
-	include('admin/../config.php');
+	ob_start();
+	include('config.php');
+	if(mysql_num_rows(mysql_query("SHOW TABLES")) != 0) {
+		header("Location: index.php");
+	}
 	if (isset($_POST['developer_name']) && $_POST['developer_name'] != '' && isset($_POST['developer_mail']) && $_POST['developer_mail'] != '') {
 		mysql_query ('CREATE TABLE projects( '.
 			'`id` INT NOT NULL AUTO_INCREMENT,'.
@@ -30,7 +34,7 @@
 			'`theme` TEXT NOT NULL, '.
 			'`language` TEXT NOT NULL, '.
 			'PRIMARY KEY(id))');
-		$insertinfo = mysql_query ("INSERT INTO `info` (`id`,`url`,`username`,`password`,`developername`,`developermail`,`theme`,`language`) VALUES ('', 'http://".dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'])."','".$_POST['username']."','".$_POST['password']."','".$_POST['developer_name']."','".$_POST['developer_mail']."','".$_POST['theme']."','".$_POST['language']."')");
+		$insertinfo = mysql_query ("INSERT INTO `info` (`id`,`url`,`username`,`password`,`developername`,`developermail`,`theme`,`language`) VALUES ('', 'http://".dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'])."','".$_POST['username']."','".md5($_POST['password'])."','".$_POST['developer_name']."','".$_POST['developer_mail']."','".$_POST['theme']."','".$_POST['language']."')");
 		$insertcategory = mysql_query ("INSERT INTO `categories` (`id`,`name`) VALUES ('','Without Category')");
 	}
 ?>
@@ -69,18 +73,19 @@
 					<hr color="#CCC" />
 					<p class="part">Language: 
 					<select name="language">
-					<?php
-					foreach (glob("languages/*.pl") as $filename) {
-						$filename = str_replace("languages/","",$filename);
-						$filename = str_replace(".pl","",$filename);
-						if($filename == 'en_US') {
-							echo "<option selected=\"selected\">{$filename}</option>";
+						<?php
+						foreach (glob("languages/*.pl") as $filename) {
+							$filename = str_replace("languages/","",$filename);
+							$filename = str_replace(".pl","",$filename);
+							include("languages/{$filename}.pl");
+							if($filename == $info['language']) {
+								echo "<option value=\"{$filename}\" selected=\"selected\">{$filename} [{$direction}]</option>";
+							}
+							else {
+								echo "<option value=\"{$filename}\">{$filename} [{$direction}]</option>";
+							}
 						}
-						else {
-							echo "<option>{$filename}</option>";
-						}
-					}
-					?>
+						?>
 					</select>
 					</p>
 					<p class="part">Theme: 
@@ -91,11 +96,12 @@
 							foreach ($results as $result) {
 								if ($result === '.' or $result === '..') continue;
 								if (is_dir($path . '/' . $result)) {
-									if($result == 'default') {
-										echo("<option selected=\"selected\" value=\"{$result}\">{$result}</option>");
+									include("themes/{$result}/info.pt");
+									if($result == $info['theme']) {
+										echo("<option selected=\"selected\" value=\"{$result}\">{$result} [{$theme_direction}]</option>");
 									}
 									else {
-										echo("<option value=\"{$result}\">{$result}</option>");
+										echo("<option value=\"{$result}\">{$result} [{$theme_direction}]</option>");
 									}
 								}
 							}
@@ -114,3 +120,4 @@
 		</div>
 	</body>
 </html>
+<?php ob_end_flush(); ?>

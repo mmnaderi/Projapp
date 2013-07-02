@@ -19,7 +19,7 @@
 	
 	// check if developer doesn't have any project
 	$rows = mysql_result(mysql_query("SELECT COUNT(*) FROM `projects`"), 0);
-	if(!$rows) { echo($info['developername']." doesn't have any project. :("); }
+	if(!$rows) { echo($lang['no_project']); }
 	
 	// start categories
 	$categories_query = mysql_query("SELECT * FROM `categories`");
@@ -31,7 +31,7 @@
 	
 	// start projects in any categories
 	$empty_category = mysql_result(mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'"), 0);
-	if (!$empty_category && $categories['name'] != 'Without Category') { echo('<span class="note">there isn\'t any project on this category.</span>'); }
+	if (!$empty_category && $categories['name'] != 'Without Category') { echo("<span class=\"note\">{$lang['no_project_in_cat']}</span>"); }
 	$projects_query = mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'");
 	while($projects = mysql_fetch_array($projects_query)) {
 ?>
@@ -43,25 +43,28 @@
 				<span class="description"><?php echo($projects['description']); ?></span>
 				<div class="percent-full"><?php
 					if ($projects['percent'] == 100) {
-						echo('<img src="admin/images/complete.png" alt="Complete" title="Complete" />');
+						echo('<img src="admin/images/complete.png" alt="'.$lang['complete'].'" title="'.$lang['complete'].'" />');
 					}
 					else {
-						echo('<img src="admin/images/indevelope.png" alt="In Develope" title="In Develope" />');
+						echo('<img src="admin/images/indevelop.png" alt="'.$lang['in_develop'].'" title="'.$lang['in_develop'].'" />');
 					}
 				?>
 					<div class="percent-text"><?php echo($projects['percent']); ?>%</div>
 				</div>
 				<div class="type"><?php
-					if ($projects['type'] == 'download') {
+					if ($projects['type'] == 'public') {
 						if($projects['file'] == $info['url'].'/public/') {
-							echo('<img src="admin/images/download.png" alt="For Download" title="For Download" />');
+							echo('<img src="admin/images/download.png" alt="'.$lang['public'].'" title="'.$lang['public'].'" />');
 						}
 						else {
-							echo('<a href="'. $projects['file'] .'"><img src="admin/images/download.png" alt="For Download" title="For Download" /></a>');
+							echo('<a href="'. $info['url'] .'/public/'. $projects['file'] .'"><img src="admin/images/download.png" alt="'.$lang['public'].'" title="'.$lang['public'].'" /></a>');
 						}
 					}
+					elseif ($projects['type'] == 'sale') {
+						echo('<a href="mailto:'. $info['developermail'] .'"><img src="admin/images/sale.png" alt="'.$lang['sale'].'" title="'.$lang['sale'].'" /></a>');
+					}
 					else {
-						echo('<a href="mailto:'. $developermail .'"><img src="admin/images/sale.png" alt="For Sale" title="For Sale" /></a>');
+						echo('<img src="admin/images/private.png" alt="'.$lang['private'].'" title="'.$lang['private'].'" />');
 					}
 				?></div>
 			</li>

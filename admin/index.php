@@ -29,8 +29,6 @@
 					<h1 class="page-title"><font size="5">{</font>Projects List}</h1>
 					<ul class="projects">
 					<?php
-						}
-						mysql_close($connect);
 						include ('../config.php');
 						$counter = 1;
 						//////////////////////////////////////////////////////////////
@@ -59,15 +57,16 @@
 									echo('<img src="images/complete.png" alt="Complete" title="Complete" />');
 								}
 								else {
-									echo('<img src="images/indevelope.png" alt="In Develope" title="In Develope" />');
+									echo('<img src="images/indevelop.png" alt="In Develope" title="In Develop" />');
 								}
 							?><div class="percent-text"><?php echo($projects['percent']); ?>%</div></div>
 							<div class="type"><?php
-								if ($projects['type'] == 'download') {
-									echo('<a href="'. $projects['file'] .'"><img src="images/download.png" alt="For Download" title="For Download" /></a>');
-								}
-								else {
+								echo('<a href="download.php?url='.'../'.$projects['type'].'/'.$projects['file'].'"><img src="images/download.png" alt="Download" title="Download" /></a>');
+								if($projects['type'] == 'sale') {
 									echo('<a href="'. $projects['file'] .'"><img src="images/sale.png" alt="For Sale" title="For Sale" /></a>');
+								}
+								if($projects['type'] == 'private') {
+									echo('<img src="images/private.png" alt="Private" title="Private" />');
 								}
 							?></div>
 						</li>
@@ -80,6 +79,7 @@
 	</body>
 </html>
 <?php
+	}
 	mysql_close($connect);
 	}
 	else {

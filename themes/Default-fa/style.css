@@ -4,12 +4,18 @@
 ## Author:       Mohammad Mahdi Naderi ##
 ## Project Site: projapp.mmnaderi.ir   ##
 #######################################*/
-@import "css/hint.min.css";
+@font-face {
+  font-family: 'BYekan';
+  src: url('fonts/BYekan.eot?#') format('eot'),  /* IE6–8 */
+       url('fonts/BYekan.woff') format('woff'),  /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+       url('fonts/BYekan.ttf') format('truetype');  /* Saf3—5, Chrome4+, FF3.5, Opera 10+ */
+}
 * {
 	padding:0;
 	margin:0;
 }
 html, body {
+	direction:rtl;
 	font-family:Tahoma;
 	font-size:13px;
 	color:#161616;
@@ -38,9 +44,6 @@ input[type="text"], input[type="submit"], input[type="password"], textarea, sele
 	font-size:13px;
 	font-family:Tahoma;
 	color:#161616;
-}
-select option {
-	padding-right:15px;
 }
 a.button {
 	padding:5px;
@@ -109,15 +112,16 @@ ul.toolbar li:last-child {
 }
 h1,h2,h3,h4,h5,h6 ,.page-title {
 	color:#5A5A5A;
-	font-size:18px;
-	font-family:Trebuchet MS;
+	font-size:21px;
+	font-weight:inherit;
+	font-family:'BYekan';
 	margin-bottom:5px;
 }
 .page-title {
 	text-align:center;
 }
 h2 {
-	font-size:15px;
+	font-size:18px;
 }
 h2.category-title {
 	margin-top:15px;
@@ -138,31 +142,33 @@ ul.projects li:hover {
 }
 ul.projects li div.percent-text {
 	width:40px;
-	float:right;
-	text-align:right;
+	float:left;
+	text-align:left;
 }
 ul.projects li .name {
+	float:right;
 	font-size:13px;
 	font-family:Tahoma;
 }
 ul.projects li .description {
-	margin-left:40px;
+	margin-right:40px;
 	font-size:11px;
 }
 ul.projects li .percent, ul.projects li .type {
-	float:right;
-	margin-right:20px;
+	float:left;
+	margin-left:20px;
 }
 ul.projects li .percent-full {
-	float:right;
-	margin-right:0;
+	width:64px;
+	float:left;
+	margin-left:0;
 }
 ul.projects li .edit {
-	float:right;
+	float:left;
 }
 /*-----------------------------------*/
 .project-description {
-	width:183px;
+	width:180px;
 	height:173px;
 }
 p.part {
@@ -189,21 +195,11 @@ input[name="progress_level"] {
 }
 .copyright {
 	margin-top:5px;
+	text-align:left;
+	font-size:12px;
 }
-.help {
-	width:20px;
-	height:20px;
-	float:right;
-	background:url('images/help.png');
-	margin:-1px -17px 5px 0px;
-	cursor:pointer;
-}
-.help span {
-	max-width:220px;
-	text-align:justify;
-}
-.justify {
-	text-align:justify;
+.copyright a {
+	font-size:13px;
 }
 /*--------------------------------------------------*/
 /*------------------- Another CSS ------------------*/
@@ -241,51 +237,6 @@ span.tooltip:after {
 	border-color: transparent transparent transparent #333;
 	top: 7px;
 	left: 86px;
-}
-/* hover */
-a:hover .tooltip-right {
-	text-decoration:none;
-	visibility:visible;
-	opacity:1;
-	-moz-transition:all 0.2s linear;
-	-webkit-transition:all 0.2s linear;
-	-o-transition:all 0.2s linear;
-	transition:all 0.2s linear;
-}
-span.tooltip-right {
-	position: absolute;
-	margin-top:-10px;
-	margin-left:31px;
-	/*width: 80px;
-	height: 20px;*/
-	line-height: 20px;
-	padding: 8px;
-	font-size: 11px;
-	/*text-align: center;*/
-	color: #DDD;
-	background: #333;
-	border: 0px solid rgb(255, 255, 255);
-	border-radius: 3px;
-	text-shadow: rgba(0, 0, 0, 0.1) 1px 1px 1px;
-	box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 2px 0px;
-	visibility:hidden;
-	opacity:0;
-	z-index:999;
-	-moz-transition:all 0.4s linear;
-	-webkit-transition:all 0.4s linear;
-	-o-transition:all 0.4s linear;
-	transition:all 0.4s linear;
-}
-span.tooltip-right:after {
-	content: "";
-	position: absolute;
-	width: 0;
-	height: 0;
-	border-width: 6px;
-	border-style: solid;
-	border-color: transparent #333 transparent transparent;
-	top: 14px;
-	left: -12px;
 }
 /* hover */
 a:hover .tooltip {

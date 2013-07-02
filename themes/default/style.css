@@ -118,9 +118,6 @@ h2 {
 h2.category-title {
 	margin-top:15px;
 }
-ul.projects {
-	margin-top:-20px;
-}
 ul.projects li {
 	color:#444;
 	padding:10px;
@@ -153,6 +150,7 @@ ul.projects li .percent, ul.projects li .type {
 	margin-right:20px;
 }
 ul.projects li .percent-full {
+	width:64px;
 	float:right;
 	margin-right:0;
 }
