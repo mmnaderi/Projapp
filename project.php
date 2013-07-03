@@ -23,6 +23,6 @@
 	include($themeurl.'/footer.pt');
 	}
 	else {
-		
+		header('Location: index.php');
 	}
 ?>
