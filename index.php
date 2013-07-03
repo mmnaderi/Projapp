@@ -41,12 +41,17 @@
 					$counter=$counter+1;
 				?></span>
 				<span class="description"><?php echo($projects['description']); ?></span>
+				<?php if($projects['content'] != '') { ?>
+				<div class="view">
+					<a href="project.php?id=<?php echo($projects['id']);?>" title="<?php echo($projects['name']); ?>"><img src="admin/images/view.png" alt="" title="" /><span class="tooltip-bottom"><?php echo($lang['view_project']); ?></span></a>
+				</div>
+				<?php } ?>
 				<div class="percent-full"><?php
 					if ($projects['percent'] == 100) {
-						echo('<img src="admin/images/complete.png" alt="'.$lang['complete'].'" title="'.$lang['complete'].'" />');
+						echo('<a href="#"><img src="admin/images/complete.png" alt="'.$lang['complete'].'" title="'.$lang['complete'].'" /><span class="tooltip-bottom">'.$lang['complete'].'</span></a>');
 					}
 					else {
-						echo('<img src="admin/images/indevelop.png" alt="'.$lang['in_develop'].'" title="'.$lang['in_develop'].'" />');
+						echo('<a href="#"><img src="admin/images/indevelop.png" alt="'.$lang['in_develop'].'" title="'.$lang['in_develop'].'" /><span class="tooltip-bottom">'.$lang['in_develop'].'</span></a>');
 					}
 				?>
 					<div class="percent-text"><?php echo($projects['percent']); ?>%</div>
@@ -54,17 +59,17 @@
 				<div class="type"><?php
 					if ($projects['type'] == 'public') {
 						if($projects['file'] == $info['url'].'/public/') {
-							echo('<img src="admin/images/download.png" alt="'.$lang['public'].'" title="'.$lang['public'].'" />');
+							echo('<a href="#"><img src="admin/images/download.png" alt="'.$lang['public'].'" title="'.$lang['public'].'" />'.$lang['public'].'</a>');
 						}
 						else {
-							echo('<a href="'. $info['url'] .'/public/'. $projects['file'] .'"><img src="admin/images/download.png" alt="'.$lang['public'].'" title="'.$lang['public'].'" /></a>');
+							echo('<a href="'. $info['url'] .'/public/'. $projects['file'] .'"><img src="admin/images/download.png" alt="'.$lang['public'].'" title="'.$lang['public'].'" /><span class="tooltip-bottom">'.$lang['public'].'['.$lang['download'].']'.'</span></a>');
 						}
 					}
 					elseif ($projects['type'] == 'sale') {
-						echo('<a href="mailto:'. $info['developermail'] .'"><img src="admin/images/sale.png" alt="'.$lang['sale'].'" title="'.$lang['sale'].'" /></a>');
+						echo('<a href="mailto:'. $info['developermail'] .'"><img src="admin/images/sale.png" alt="'.$lang['sale'].'" title="'.$lang['sale'].'" /><span class="tooltip-bottom">'.$lang['sale'].'</span></a>');
 					}
 					else {
-						echo('<img src="admin/images/private.png" alt="'.$lang['private'].'" title="'.$lang['private'].'" />');
+						echo('<a href="#"><img src="admin/images/private.png" alt="'.$lang['private'].'" title="'.$lang['private'].'" /><span class="tooltip-bottom">'.$lang['private'].'</span></a>');
 					}
 				?></div>
 			</li>

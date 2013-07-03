@@ -19,6 +19,7 @@
 			'`percent` INT NOT NULL , '.
 			'`file` TEXT NOT NULL , '.
 			'`category` TEXT NOT NULL , '.
+			'`content` TEXT NOT NULL , '.
 			'PRIMARY KEY(id))');
 		mysql_query ('CREATE TABLE categories( '.
 			'`id` INT NOT NULL AUTO_INCREMENT,'.

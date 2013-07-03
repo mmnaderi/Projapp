@@ -131,12 +131,15 @@ ul.projects li {
 	padding:10px;
 	border-top:1px solid #ddd;
 }
-ul.projects li:first-child {
+ul.projects li * {
+	text-shadow:none;
+}
+/*ul.projects li:first-child {
 	border-top:none;
 }
 ul.projects li:last-child {
 	border-bottom:none;
-}
+}*/
 ul.projects li:hover {
 	background-color:#F4F4F4;
 }
@@ -153,6 +156,10 @@ ul.projects li .name {
 ul.projects li .description {
 	margin-right:40px;
 	font-size:11px;
+}
+ul.projects li .view {
+	float:left;
+	margin-right:20px;
 }
 ul.projects li .percent, ul.projects li .type {
 	float:left;
@@ -194,7 +201,7 @@ input[name="progress_level"] {
 	font-size:10px;
 }
 .copyright {
-	margin-top:5px;
+	margin-top:20px;
 	text-align:left;
 	font-size:12px;
 }
@@ -240,6 +247,51 @@ span.tooltip:after {
 }
 /* hover */
 a:hover .tooltip {
+	text-decoration:none;
+	visibility:visible;
+	opacity:1;
+	-moz-transition:all 0.2s linear;
+	-webkit-transition:all 0.2s linear;
+	-o-transition:all 0.2s linear;
+	transition:all 0.2s linear;
+}
+span.tooltip-bottom {
+	position: absolute;
+	margin-top:-35px;
+	margin-right:-55px;
+	width: 80px;
+	height: 20px;
+	line-height: 20px;
+	padding: 3px;
+	font-size: 11px;
+	text-align: center;
+	color: #DDD;
+	background: #333;
+	border: 0px solid rgb(255, 255, 255);
+	border-radius: 3px;
+	text-shadow: rgba(0, 0, 0, 0.1) 1px 1px 1px;
+	box-shadow: rgba(0, 0, 0, 0.1) 1px 1px 2px 0px;
+	visibility:hidden;
+	opacity:0;
+	z-index:999;
+	-moz-transition:all 0.4s linear;
+	-webkit-transition:all 0.4s linear;
+	-o-transition:all 0.4s linear;
+	transition:all 0.4s linear;
+}
+span.tooltip-bottom:after {
+	content: "";
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-width: 6px;
+	border-style: solid;
+	border-color: #333 transparent transparent transparent;
+	bottom: -12px;
+	left: 35px;
+}
+/* hover */
+a:hover .tooltip-bottom {
 	text-decoration:none;
 	visibility:visible;
 	opacity:1;

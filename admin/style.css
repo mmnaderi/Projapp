@@ -107,6 +107,15 @@ ul.toolbar li:last-child {
 	width:425px;
 	margin-left:10px;
 }
+.container-big {
+	width:628px;
+	margin:50px auto;
+}
+.primery-big {
+	float:left;
+	width:553px;
+	margin-left:10px;
+}
 h1,h2,h3,h4,h5,h6 ,.page-title {
 	color:#5A5A5A;
 	font-size:18px;
@@ -161,25 +170,42 @@ ul.projects li .edit {
 	float:right;
 }
 /*-----------------------------------*/
-.project-description {
-	width:183px;
-	height:173px;
+.project-description, .project-name {
+	width:250px;
 }
 p.part {
 	margin:8px 0;
 }
 select.project-type {
-	width:220px;
+	width:260px;
+	height:26px;
+}
+.project-file {
+	width:258px;
+	height:26px;
+	background-color:#EEE;
+	border:1px #CCC solid;
+	border-radius:3px;
+	font-size:13px;
+	font-family:Tahoma;
+	color:#161616;
 }
 .left {
-	width:200px;
+	width:240px;
 	float:left;
+	margin-right:25px;
+}
+.right {
+	width:240px;
+	float:left;
+	margin-left:25px;
 }
 input[name="progress_level"] {
-	width:210px;
+	width:250px;
 }
 .project-category {
-	width:220px;
+	width:260px;
+	height:26px;
 }
 .submit-category {
 	float:right;
@@ -195,7 +221,7 @@ input[name="progress_level"] {
 	height:20px;
 	float:right;
 	background:url('images/help.png');
-	margin:-1px -17px 5px 0px;
+	margin:7px -17px 0px 0px;
 	cursor:pointer;
 }
 .help span {
@@ -204,6 +230,9 @@ input[name="progress_level"] {
 }
 .justify {
 	text-align:justify;
+}
+.editor {
+	margin-top:15px;
 }
 /*--------------------------------------------------*/
 /*------------------- Another CSS ------------------*/

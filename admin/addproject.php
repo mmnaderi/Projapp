@@ -26,7 +26,7 @@
 				$message = "Please enter progress level between 0 and 100.";
 			}
 			else {
-			$addproject = mysql_query ("INSERT INTO `projects` (`id`,`name`,`description`,`type`,`percent`,`file`,`category`) VALUES ('', '". $_POST['project_name'] ."','". $_POST['project_description'] ."','". $_POST['project_type'] ."','". $_POST['progress_level'] ."','".$_FILES['file']['name']."','". $_POST['project_category'] ."')");
+			$addproject = mysql_query ("INSERT INTO `projects` (`id`,`name`,`description`,`type`,`percent`,`file`,`category`,`content`) VALUES ('', '". $_POST['project_name'] ."','". $_POST['project_description'] ."','". $_POST['project_type'] ."','". $_POST['progress_level'] ."','".$_FILES['file']['name']."','". $_POST['project_category'] ."','".$_POST['content']."')");
 			if(isset($_POST['project_type']) && $_POST['project_type'] == 'public') {
 				$target_path = "../public/";
 			}
@@ -52,13 +52,14 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link href="favicon.ico" rel="shortcut icon">
 		<link href="style.css" rel="stylesheet" type="text/css">
+		<script src="ckeditor/ckeditor.js" type="text/javascript"></script>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container-big">
 			<a href="<?php echo($info['url']); ?>/admin" title="Projapp"><img src="images/logo-full.png" alt="Projapp" /></a>
 			<div class="wrapper">
 				<?php require('toolbar.php'); ?>
-				<div class="primery">
+				<div class="primery-big">
 					<h1 class="page-title"><font size="5">{</font>Add New Project}</h1>
 					<?php if(isset($message) && $message != '') { ?>
 					<p><img src="images/error.png" alt="Error" /><font color="red"> <?php echo($message); ?></font></p>
@@ -68,18 +69,39 @@
 					<?php } elseif (isset($_POST['request']) && $_POST['request'] == 'true') {?>
 					<p><img src="images/error.png" alt="Error" /><font color="red"> Unfortunately There is an error to add project.</font></p>
 					<?php } ?>
+					
+					
 					<form enctype="multipart/form-data" action="addproject.php" method="POST">
-						<p class="part">Project Name: <input type="text" name="project_name" /></p>
-						<div class="left">
-							<p class="part">Project Description:</p><textarea class="project-description" name="project_description"></textarea>
-						</div>
 						<div class="left">
 							<a class="help">
 							<span class="tooltip-right">
-								<p>Enter number of progress level of your project. (between 0 and 100)</p>
+								<p>Enter your project title.</p>
 							</span>
 							</a>
-							<p class="part">Progress Level: <input type="text" name="progress_level" /></p>
+							<p class="part">Project Name:</p><input class="project-name" type="text" name="project_name" />
+							<a class="help">
+							<span class="tooltip-right">
+								<p>Enter a short description of your project.</p>
+							</span>
+							</a>
+							<p class="part">Project Description:</p><input type="text" class="project-description" name="project_description">
+							<a class="help">
+							<span class="tooltip-right">
+								<p>Enter the category of your project. If your project doesn't have any category select 'Without Category'</p>
+							</span>
+							</a>
+							<p class="part">Project Category:</p>
+								<select class="project-category" name="project_category">
+									<?php get_categories(); ?>
+								</select>
+						</div>
+						<div class="right">
+							<a class="help">
+							<span class="tooltip-right">
+								<p>Enter progress level of your project. (between 0 and 100)</p>
+							</span>
+							</a>
+							<p class="part">Progress Level:</p><input type="text" name="progress_level" />
 							<a class="help">
 							<span class="tooltip-right">
 								<p><strong>Public</strong><br/>Everyone can download your project file</p>
@@ -87,29 +109,22 @@
 								<p><strong>Sale</strong><br/>People can buy your project</p>
 							</span>
 							</a>
-							<p class="part">Project Type:
+							<p class="part">Project Type:</p>
 								<select class="project-type" name="project_type">
 								<option value="public">Public</option>
 								<option value="private">Private</option>
 								<option value="sale">Sale</option>
 								</select>
-							</p>
-							<a class="help">
-							<span class="tooltip-right">
-								<p>Enter the category of your project. If your project doesn't have any category select 'Without Category'</p>
-							</span>
-							</a>
-							<p class="part">Project Category:
-								<select class="project-category" name="project_category">
-									<?php get_categories(); ?>
-								</select>
-							</p>
 							<a class="help">
 							<span class="tooltip-right">
 								<p>Select your project file. Less than <?php echo(ini_get('upload_max_filesize')); ?> on this Server.</p>
 							</span>
 							</a>
-						<p class="part">Project File:</p><input name="file" type="file" /><br />
+						<p class="part">Project File:</p><input class="project-file" name="file" type="file" />
+						</div>
+						<div class="clearfix"></div>
+						<div class="editor">
+							<textarea class="ckeditor" name="content">Project Details (a full description of your project)</textarea>
 						</div>
 						<input type="hidden" name="request" value="true" />
 						<div class="submit-project"><input type="submit" value="Submit Project »" /></div>
