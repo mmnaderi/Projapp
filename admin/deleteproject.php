@@ -31,11 +31,11 @@
 						if (isset($_GET['id'])) {
 							$deleteproject = mysql_query("DELETE FROM `projects` WHERE `id`=".$_GET['id']);
 							if ($deleteproject) {
-								echo('project was deleted!');
+								echo('<p class="success"><img src="images/complete.png" alt="Complete" />project was deleted!</p>');
 							}
 						}
 						else {
-							echo('please choose a project to delete.');
+							echo('<p class="error"><img src="images/error.png" alt="Error" />please choose a project to delete.</p>');
 						}
 					?>
 				</div>
