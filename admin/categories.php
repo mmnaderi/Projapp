@@ -44,9 +44,9 @@
 				<div class="primery">
 					<h1 class="page-title"><font size="5">{</font>Categories List}</h1>
 					<?php if(isset($addcategory) && $addcategory) {?>
-					<p><img src="images/complete.png" alt="Complete" /><font color="green"> Perfect! category was added.</font></p>
+					<p class="success"><img src="images/complete.png" alt="Complete" />Perfect! category was added.</p>
 					<?php } elseif (isset($_POST['request']) && $_POST['request'] == 'true') {?>
-					<p><img src="images/error.png" alt="Error" /><font color="red"> Unfortunately There is an error to add category.</font></p>
+					<p class="error"><img src="images/error.png" alt="Error" />Unfortunately There is an error to add category.</p>
 					<?php } ?>
 					<ul class="projects">
 						<?php
