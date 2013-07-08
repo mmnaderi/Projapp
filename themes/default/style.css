@@ -65,7 +65,7 @@ input[type="submit"]:hover {
    clear: both;
 }
 .container {
-	width:500px;
+	width:518px;
 	margin:50px auto;
 }
 .wrapper {
@@ -117,6 +117,10 @@ h2 {
 }
 h2.category-title {
 	margin-top:15px;
+}
+h2.category-title img {
+	float:right;
+	margin-left:10px;
 }
 ul.projects li {
 	color:#444;
@@ -190,6 +194,25 @@ input[name="progress_level"] {
 .view {
 	float:right;
 	margin-left:20px;
+}
+.footer {
+	width:100%;
+	margin-top:15px;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	-webkit-box-sizing:border-box;
+    padding: 10px;
+    text-shadow: 1px 1px rgb(248, 248, 248);
+    border: 1px solid rgb(255, 255, 255);
+    background: none repeat scroll 0% 0% rgb(240, 240, 240);
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0px 0px 5px rgb(180, 179, 175);
+}
+.footer-left {
+	display:inline-block;
+}
+.footer-right {
+	float:right;
 }
 /*--------------------------------------------------*/
 /*------------------- Another CSS ------------------*/

@@ -10,6 +10,7 @@
 		<link href="<?php echo($themeurl); ?>/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-		<div class="container wrapper">
+		<div class="container">
+		<div class="wrapper">
 		<h1 class="page-title"><a href="<?php echo($info['url']); ?>" title="پروژه‌های <?php echo($info['developername']); ?>"><font size="5">{</font>پروژه‌های <?php echo($info['developername']); ?>}</a></h1>
 		<ul class="projects">

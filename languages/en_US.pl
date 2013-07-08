@@ -2,7 +2,7 @@
 $direction = 'ltr';
 $lang = array(
 	"no_project" => "{$info['developername']} doesn't have any project. :(",
-	"no_project_in_cat" => "there isn't any project on this category.",
+	"no_project_in_cat" => "There isn't any project in this category.",
 	"public" => "Public",
 	"download" => "Download",
 	"private" => "Private",

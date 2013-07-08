@@ -42,7 +42,7 @@
 						}
 						
 						$empty_category = mysql_result(mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'"), 0);
-						if (!$empty_category && $categories['name'] != 'Without Category') { echo('<span class="note">there isn\'t any project on this category.</span>'); }
+						if (!$empty_category && $categories['name'] != 'Without Category') { echo('<span class="note">There isn\'t any project in this category.</span>'); }
 						$projects_query = mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'");
 						while($projects = mysql_fetch_array($projects_query)) {
 					?>
@@ -61,9 +61,17 @@
 								}
 							?><div class="percent-text"><?php echo($projects['percent']); ?>%</div></div>
 							<div class="type"><?php
-								echo('<a href="download.php?url='.'../'.$projects['type'].'/'.$projects['file'].'"><img src="images/download.png" alt="Download" title="Download" /></a>');
+								if($projects['file'] != '') {
+									echo('<a href="download.php?url='.'../'.$projects['type'].'/'.$projects['file'].'"><img src="images/download.png" alt="Download" title="Download" /></a>');
+								}
+								else {
+									echo('<img src="images/not-download.png" alt="Without File" title="Without File" />');
+								}
+								if($projects['type'] == 'public') {
+									echo('<img src="images/public.png" alt="Public" title="Public" />');
+								}
 								if($projects['type'] == 'sale') {
-									echo('<a href="'. $projects['file'] .'"><img src="images/sale.png" alt="For Sale" title="For Sale" /></a>');
+									echo('<img src="images/sale.png" alt="For Sale" title="For Sale" />');
 								}
 								if($projects['type'] == 'private') {
 									echo('<img src="images/private.png" alt="Private" title="Private" />');
@@ -75,6 +83,7 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
+			<?php require_once('footer.php'); ?>
 		</div>
 	</body>
 </html>

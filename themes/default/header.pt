@@ -10,6 +10,7 @@
 		<link href="<?php echo($themeurl); ?>/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-		<div class="container wrapper">
+		<div class="container">
+		<div class="wrapper">
 		<h1 class="page-title"><a href="<?php echo($info['url']); ?>" title="<?php echo($info['developername']); ?>'s Projects"><font size="5">{</font><?php echo($info['developername']); ?>'s Projects}</a></h1>
 		<ul class="projects">

@@ -62,15 +62,13 @@
 				<div class="primery-big">
 					<h1 class="page-title"><font size="5">{</font>Add New Project}</h1>
 					<?php if(isset($message) && $message != '') { ?>
-					<p><img src="images/error.png" alt="Error" /><font color="red"> <?php echo($message); ?></font></p>
+					<p class="error"><img src="images/error.png" alt="Error" /><?php echo($message); ?></p>
 					<?php } ?>
 					<?php if(isset($addproject) && $addproject) {?>
-					<p><img src="images/complete.png" alt="Complete" /><font color="green"> Perfect! project was added.</font></p>
+					<p class="success"><img src="images/complete.png" alt="Complete" />Perfect! project was added.</p>
 					<?php } elseif (isset($_POST['request']) && $_POST['request'] == 'true') {?>
-					<p><img src="images/error.png" alt="Error" /><font color="red"> Unfortunately There is an error to add project.</font></p>
+					<p class="error"><img src="images/error.png" alt="Error" />Unfortunately There is an error to add project.</p>
 					<?php } ?>
-					
-					
 					<form enctype="multipart/form-data" action="addproject.php" method="POST">
 						<div class="left">
 							<a class="help">
@@ -132,6 +130,7 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
+			<?php require_once('footer.php'); ?>
 		</div>
 	</body>
 </html>

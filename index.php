@@ -26,7 +26,7 @@
 	while($categories = mysql_fetch_array($categories_query)) {
 	$counter = 1;
 	if($categories['name'] != 'Without Category') {
-		echo('<h2 class="category-title">'.$categories['name'].'</h2>');
+		echo('<h2 class="category-title"><img src="admin/images/category.png" />'.$categories['name'].'</h2>');
 	}
 	
 	// start projects in any categories
@@ -69,7 +69,7 @@
 						echo('<a href="mailto:'. $info['developermail'] .'"><img src="admin/images/sale.png" alt="'.$lang['sale'].'" title="'.$lang['sale'].'" /><span class="tooltip-bottom">'.$lang['sale'].'</span></a>');
 					}
 					else {
-						echo('<a href="#"><img src="admin/images/private.png" alt="'.$lang['private'].'" title="'.$lang['private'].'" /><span class="tooltip-bottom">'.$lang['private'].'</span></a>');
+						echo('<a href="#"><img src="admin/images/private.png" alt="'.$lang['private'].'" title="'.$lang['private'].'" /><span class="tooltip-bottom small">'.$lang['private'].'</span></a>');
 					}
 				?></div>
 			</li>

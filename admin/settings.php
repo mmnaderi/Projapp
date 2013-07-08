@@ -9,12 +9,20 @@
 	@session_start();
 	if(isset($_SESSION['admin'])) {
 	include ('../config.php');
-	if (isset($_POST['developer_name']) && $_POST['developer_name'] != '' || isset($_POST['developer_mail']) && $_POST['developer_mail'] != '') {
-		if(isset($_POST['password']) && $_POST['password'] != '') {
-			$updateinfo = mysql_query ("UPDATE `info` SET `username`='".$_POST['username']."', `password`='".$_POST['password']."',`developername`='".$_POST['developer_name']."', `developermail`='". $_POST['developer_mail'] ."', `theme`='". $_POST['theme'] ."', `language`='". $_POST['language'] ."' WHERE `id`='1'");
+	$query = mysql_query("SELECT * FROM `info`");
+	while($information = mysql_fetch_array($query)) {
+		if (isset($_POST['username']) && $_POST['username'] != $information['username'] && $_POST['username'] != ''
+		|| isset($_POST['developer_name']) && $_POST['developer_name'] != $information['developername'] && $_POST['developer_name'] != ''
+		|| isset($_POST['developer_mail']) && $_POST['developer_mail'] != $information['developermail'] && $_POST['developer_mail'] != ''
+		/*|| isset($_POST['password']) && $_POST['password'] != ''
+		|| isset($_POST['language']) || isset($_POST['theme'])*/) {
+			$updateinfo = mysql_query ("UPDATE `info` SET `username`='".$_POST['username']."', `developername`='".$_POST['developer_name']."', `developermail`='". $_POST['developer_mail'] ."' WHERE `id`='1'");
 		}
-		else {
-			$updateinfo = mysql_query ("UPDATE `info` SET `username`='".$_POST['username']."', `developername`='".$_POST['developer_name']."', `developermail`='". $_POST['developer_mail'] ."', `theme`='". $_POST['theme'] ."', `language`='". $_POST['language'] ."' WHERE `id`='1'");
+		if(isset($_POST['password']) && $_POST['password'] != '') {
+			$updateinfo = mysql_query ("UPDATE `info` SET `password`='".md5($_POST['password'])."' WHERE `id`='1'");
+		}
+		if(isset($_POST['language']) && $_POST['language'] != '' || isset($_POST['theme']) && $_POST['theme'] != '') {
+			$updateinfo = mysql_query ("UPDATE `info` SET `language`='".$_POST['language']."', `theme`='".$_POST['theme']."' WHERE `id`='1'");
 		}
 	}
 	$query = mysql_query("SELECT * FROM `info`");
@@ -39,12 +47,12 @@
 					<h1 class="page-title"><font size="5">{</font>Settings}</h1>
 					<form action="settings.php" method="POST"> 
 						<?php if(isset($updateinfo) && $updateinfo) {?>
-						<p><img src="images/complete.png" alt="Complete" /><font color="green"> Perfect! Settings was updated.</font></p>
+						<p class="success"><img src="images/complete.png" alt="Complete" />Perfect! Settings was updated.</p>
 						<?php } elseif (isset($_POST['request']) && $_POST['request'] == 'true') {?>
-						<p><img src="images/error.png" alt="Error" /><font color="red"> Unfortunately There is an error to edit settings.</font></p>
+						<p class="error"><img src="images/error.png" alt="Error" />Unfortunately There is an error to edit settings.</p>
 						<?php } ?>
 						<p class="part">Username: <input type="text" name="username" value="<?php echo($info['username']); ?>" /></p>
-						<p class="part">Password: <input type="password" name="password" value="" /></p>
+						<p class="part"><input name="check" type="checkbox" onclick="password_enable()"> New Password: <input id="password" type="password" name="password" disabled /></p>
 						<hr color="#CCC" />
 						<p class="part">Developer Name: <input type="text" name="developer_name" value="<?php echo($info['developername']); ?>" /></p>
 						<p class="part">Developer E-Mail: <input type="text" name="developer_mail" value="<?php echo($info['developermail']); ?>" /></p>
@@ -93,6 +101,7 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
+			<?php require_once('footer.php'); ?>
 		</div>
 	</body>
 </html>

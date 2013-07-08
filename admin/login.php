@@ -19,6 +19,7 @@
 	}
 	if(isset($_GET['act']) && $_GET['act'] == 'exit') {
 		unset($_SESSION['admin']);
+		$exit_message = true;
 	}
 	if(isset($_SESSION['admin'])) {
 		header('Location: index.php');
@@ -34,17 +35,20 @@
 	</head>
 	<body>
 		<div class="container" style="width:250px;">
-			<a href="<?php echo($info['url']); ?>/admin" title="Projapp"><img src="images/logo-full.png" alt="Projapp" /></a>
-			<div class="wrapper">
-				<h1 class="page-title"><font size="5">{</font>Login}</h1>
+			<div class="login-wrapper">
+				<!--<h1 class="page-title"><font size="5">{</font>Login}</h1>-->
+				<a href="<?php echo($info['url']); ?>/admin" title="Projapp"><img src="images/login-logo.png" style="background-color:<?php printf( "#%06X\n", mt_rand( 0, 0xFFFFFF )); ?>;margin-bottom:8px;" /></a>
 				<form action="login.php" method="POST">
 					<?php if (isset($_POST['request']) && $_POST['request'] == 'true') {?>
-					<p><img src="images/error.png" alt="Error" /><font color="red"> username or password is incorrect.</font></p>
+					<p class="error login-message"><img src="images/error.png" alt="Error" />Username or password is incorrect.</p>
 					<?php } ?>
-					<p class="part">Username: <input type="text" name="username" /></p>
-					<p class="part">Password: <input type="password" name="password" /></p>
+					<?php if (isset($exit_message) && $exit_message == true) { ?>
+					<p class="success login-message"><img src="images/complete.png" alt="Complete" />You are now logged out.</p>
+					<?php } ?>
+					<p class="part"><input type="text" name="username" placeholder="Username" class="login-input" /></p>
+					<p class="part"><input type="password" name="password" placeholder="Password" class="login-input" /></p>
 					<input type="hidden" name="request" value="true" />
-					<div class="submit-project"><input type="submit" value="Login »" /></div>
+					<div class="submit-login"><input type="submit" value="Login »" class="login-submit punch" /></div>
 				</form>
 				<div class="clearfix"></div>
 			</div>

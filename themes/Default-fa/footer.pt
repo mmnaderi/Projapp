@@ -1,5 +1,9 @@
 		</ul>
-		<div align="right" class="copyright">[با افتخار] نیرو‌گرفته از <a href="http://projapp.mmnaderi.ir" title="Projapp">Projapp</a></div>
+		</div>
+		<div class="footer">
+			<div class="footer-left">[با افتخار] نیرو‌گرفته از <a href="http://projapp.mmnaderi.ir" title="Projapp">Projapp</a></div>
+			<div class="footer-right">&copy; <?php echo(date('Y')); ?> - تمامی حقوق محفوظ است.</div>
+		</div>
 		</div>
 	</body>
 </html>

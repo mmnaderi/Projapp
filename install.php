@@ -51,20 +51,21 @@
 		<div class="container">
 			<a href="index.php" title="Projapp"><img src="admin/images/logo-full.png" alt="Projapp" /></a>
 			<div class="wrapper">
+				<div class="primary">
 				<h1 class="page-title"><font size="5">{</font>Install Projapp}</h1>
 				<form action="install.php" method="POST">
 					<?php
 						if (isset($insertinfo) && isset($insertcategory) && mysql_query("SELECT * FROM `info`") && mysql_query("SELECT * FROM `projects`") && mysql_query("SELECT * FROM `categories`")) {
 					?>
-					<p><img src="admin/images/complete.png" alt="Complete" /><font color="green"> Fantastic! Prpjapp is install successfully.</font></p>
-					<p>you can go to <a href="index.php" title="Home page">Home page</a> or your <a href="admin" title="Admin panel">Admin panel</a>.</p>
+					<p class="success"><img src="admin/images/complete.png" alt="Complete" />Fantastic! Projapp is install successfully.<br/>You can go to <a href="index.php" title="Home page">Home page</a> or your <a href="admin" title="Admin panel">Admin panel</a>.</p>
+					<p></p>
 					<?php
 						}
 						else {
 							error_reporting(E_ERROR);
 							if(isset($connect) && $connect) {
 					?>
-					<p><img src="admin/images/complete.png" alt="Complete" /><font color="green"> Perfect! Projapp can connect to MySql.</font></p>
+					<p class="success"><img src="admin/images/complete.png" alt="Complete" />Perfect! Projapp can connect to MySql.</p><br/>
 					<p>Install Projapp in <strong>5 Seconds!</strong> :D</p>
 					<p class="part">Username: <input type="text" name="username" /></p>
 					<p class="part">Password: <input type="password" name="password" /></p>
@@ -117,6 +118,7 @@
 					<?php } } ?>
 				</form>
 				<div class="clearfix"></div>
+				</div>
 			</div>
 		</div>
 	</body>

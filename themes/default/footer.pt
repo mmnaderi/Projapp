@@ -1,5 +1,9 @@
 		</ul>
-		<div align="right" class="copyright">Powered by <a href="http://projapp.mmnaderi.ir" title="Projapp">Projapp</a></div>
+		</div>
+		<div class="footer">
+			<div class="footer-left">&copy; <?php echo date("Y"); ?> - All rights reserved.</div>
+			<div class="footer-right">[Proudly] Powered by <a href="http://projapp.mmnaderi.ir" title="Projapp">Projapp</a></a></div>
+		</div>
 		</div>
 	</body>
 </html>

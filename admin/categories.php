@@ -9,6 +9,13 @@
 	@session_start();
 	if(isset($_SESSION['admin'])) {
 	include ('../config.php');
+	if(isset($_POST['id']) && isset($_POST['name'])) {
+		$editcategory = mysql_query ("UPDATE `categories` SET `name`='".$_POST['name']."' WHERE `id`=". $_POST['id']);
+		if($editcategory) {
+			echo($_POST['name']);
+		}
+		exit;
+	}
 	$query = mysql_query("SELECT * FROM `info`");
 	while($info = mysql_fetch_array($query)) {
 	/////////////////////////////////////////////////////////////////////
@@ -26,6 +33,8 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 		<link href="favicon.ico" rel="shortcut icon">
 		<link href="style.css" rel="stylesheet" type="text/css">
+		<script src="js/jquery-1.10.1.min.js" type="text/javascript"></script>
+		<script src="js/scripts.js" type="text/javascript"></script>
 	</head>
 	<body>
 		<div class="container">
@@ -54,10 +63,15 @@
 							if($categories['name'] != 'Without Category') {
 						?>
 						<li>
-							<span class="name"><?php
+							<div class="name"><?php
 								echo($counter);
 								$counter=$counter+1;
-							?>. <?php echo($categories['name']); ?></span>
+							?>. <div class="category_name" id="category_name<?php echo($categories['id']); ?>"><?php echo($categories['name']); ?></div>
+								<input type="text" id="category_edit<?php echo($categories['id']); ?>" name="category_name" class="category-edit" value="<?php echo($categories['name']); ?>" />
+								<img onclick="submit_category(<?php echo($categories['id']); ?>)" id="submit_category_edit<?php echo($categories['id']); ?>" class="submit_category_edit" src="images/submit.png" alt="" />
+								<span class="cancel" id="cancel<?php echo($categories['id']); ?>"> or <a onclick="cancel_edit(<?php echo($categories['id']); ?>)">Cancel</a></span>
+							</div>
+							<div class="edit-category"><img src="images/edit.png" alt="Edit Category" onclick="edit_category(<?php echo($categories['id']); ?>)" /></div>
 						</li>
 						<?php } } ?>
 							<form action="categories.php" method="POST">
@@ -69,6 +83,7 @@
 				</div>
 				<div class="clearfix"></div>
 			</div>
+			<?php require_once('footer.php'); ?>
 		</div>
 	</body>
 </html>
