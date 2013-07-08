@@ -20,7 +20,7 @@
 			} else {
 				$file_query = "";
 			}
-			$editproject = mysql_query ("UPDATE `projects` SET `name`='".$_POST['project_name']."', `description`='". $_POST['project_description'] ."', `type`='". $_POST['project_type'] ."', `percent`='". $_POST['progress_level'] ."', ".$file_query." `category`='".$_FILES['project_category'] ."', `content`='".$_FILES['content'] ."' WHERE `id`=". $_GET['id']);
+			$editproject = mysql_query ("UPDATE `projects` SET `name`='".$_POST['project_name']."', `description`='". $_POST['project_description'] ."', `type`='". $_POST['project_type'] ."', `percent`='". $_POST['progress_level'] ."', ".$file_query.", `category`='".$_FILES['project_category'] ."', `content`='".$_FILES['content'] ."' WHERE `id`=". $_GET['id']);
 			if(isset($_POST['project_type']) && $_POST['project_type'] == 'public') {
 				$target_path = "../public/";
 			}
