@@ -77,14 +77,12 @@ input[type="submit"]:hover {
 	margin:50px auto;
 }
 .wrapper {
-/*	padding:8px;*/
 	min-height:271px;
-	position:relative;
 	border-radius:4px;
 	border:1px solid #CCC;
-	background-color:#FFF;
-	box-shadow: 0px 0px 3px 0px #999; 
-	-webkit-box-shadow: 0px 0px 3px 0px #999;
+	background:url('images/toolbar.png') repeat-y #FFF;
+	box-shadow: 0px 0px 5px rgb(180, 179, 175);
+	-webkit-box-shadow: 0px 0px 5px rgb(180, 179, 175);
 }
 .small-wrapper {
 	width:200px;
@@ -107,11 +105,7 @@ ul.toolbar {
 	padding:5px;
 	background-color:#EEE;
 	border-right:1px solid #CCC;
-	position:absolute;
-	top:0px;
-	bottom:0px;
-	/*-webkit-box-shadow: inset 0px 0px 3px 0px #999;
-	box-shadow: inset 0px 0px 3px 0px #999; */
+	position: absolute;
 }
 ul.toolbar li {
 	width:32px;
