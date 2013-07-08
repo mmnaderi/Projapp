@@ -63,7 +63,7 @@
 						}
 						else {
 							error_reporting(E_ERROR);
-							if(isset($connect) && $connect) {
+							if(isset($select ) && $select) {
 					?>
 					<p class="success"><img src="admin/images/complete.png" alt="Complete" />Perfect! Projapp can connect to MySql.</p><br/>
 					<p>Install Projapp in <strong>5 Seconds!</strong> :D</p>
@@ -113,8 +113,7 @@
 					<input type="hidden" name="request" value="true" />
 					<div class="submit-project"><input type="submit" value="Install Projapp »" /></div>
 					<?php } else { ?>
-					<p><img src="admin/images/error.png" alt="Error" /><font color="red"> Unfortunately Projapp cannot connect to MySql.</font></p>
-					<p>First you must edit config.php file in this folder for connect to MySql.</p>
+					<p class="error"><img src="admin/images/error.png" alt="Error" />Unfortunately Projapp cannot connect to MySql.<br/>First you must edit config.php file in this folder for connect to MySql.</p>
 					<?php } } ?>
 				</form>
 				<div class="clearfix"></div>

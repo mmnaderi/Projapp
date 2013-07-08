@@ -11,18 +11,27 @@
 	include ('../config.php');
 	$query = mysql_query("SELECT * FROM `info`");
 	while($information = mysql_fetch_array($query)) {
-		if (isset($_POST['username']) && $_POST['username'] != $information['username'] && $_POST['username'] != ''
-		|| isset($_POST['developer_name']) && $_POST['developer_name'] != $information['developername'] && $_POST['developer_name'] != ''
-		|| isset($_POST['developer_mail']) && $_POST['developer_mail'] != $information['developermail'] && $_POST['developer_mail'] != ''
-		/*|| isset($_POST['password']) && $_POST['password'] != ''
-		|| isset($_POST['language']) || isset($_POST['theme'])*/) {
-			$updateinfo = mysql_query ("UPDATE `info` SET `username`='".$_POST['username']."', `developername`='".$_POST['developer_name']."', `developermail`='". $_POST['developer_mail'] ."' WHERE `id`='1'");
+		if (isset($_POST['username']) && $_POST['username'] != $information['username'] && $_POST['username'] != '') {
+			$updateusername = mysql_query ("UPDATE `info` SET `username`='".$_POST['username']."' WHERE `id`='1'");
 		}
-		if(isset($_POST['password']) && $_POST['password'] != '') {
-			$updateinfo = mysql_query ("UPDATE `info` SET `password`='".md5($_POST['password'])."' WHERE `id`='1'");
+		if (isset($_POST['developer_name']) && $_POST['developer_name'] != $information['developername'] && $_POST['developer_name'] != '') {
+			$updatename = mysql_query ("UPDATE `info` SET `developername`='".$_POST['developer_name']."' WHERE `id`='1'");
 		}
-		if(isset($_POST['language']) && $_POST['language'] != '' || isset($_POST['theme']) && $_POST['theme'] != '') {
-			$updateinfo = mysql_query ("UPDATE `info` SET `language`='".$_POST['language']."', `theme`='".$_POST['theme']."' WHERE `id`='1'");
+		if (isset($_POST['developer_mail']) && $_POST['developer_mail'] != $information['developermail'] && $_POST['developer_mail'] != '') {
+			$updatemail = mysql_query ("UPDATE `info` SET `developermail`='".$_POST['developer_mail']."' WHERE `id`='1'");
+		}
+		if (isset($_POST['password']) && $_POST['password'] != '') {
+			$updatepassword = mysql_query ("UPDATE `info` SET `password`='".md5($_POST['password'])."' WHERE `id`='1'");
+		}
+		if (isset($_POST['language']) && $_POST['language'] != '' && $_POST['language'] != $information['language'] || isset($_POST['theme']) && $_POST['theme'] != '' && $_POST['theme'] != $information['theme']) {
+			$updatelang_theme = mysql_query ("UPDATE `info` SET `language`='".$_POST['language']."', `theme`='".$_POST['theme']."' WHERE `id`='1'");
+		}
+		if (isset($updateusername) && $updateusername
+		|| isset($updatename) && $updatename
+		|| isset($updatemail) && $updatemail
+		|| isset($updatepassword) && $updatepassword
+		|| isset($updatelang_theme) && $updatelang_theme) {
+			$updateinfo = true;
 		}
 	}
 	$query = mysql_query("SELECT * FROM `info`");
@@ -46,7 +55,7 @@
 				<div class="primery">
 					<h1 class="page-title"><font size="5">{</font>Settings}</h1>
 					<form action="settings.php" method="POST"> 
-						<?php if(isset($updateinfo) && $updateinfo) {?>
+						<?php if(isset($updateinfo) && $updateinfo == true) {?>
 						<p class="success"><img src="images/complete.png" alt="Complete" />Perfect! Settings was updated.</p>
 						<?php } elseif (isset($_POST['request']) && $_POST['request'] == 'true') {?>
 						<p class="error"><img src="images/error.png" alt="Error" />Unfortunately There is an error to edit settings.</p>
