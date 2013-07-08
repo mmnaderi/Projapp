@@ -7,7 +7,8 @@
 	#########################################
 	ob_start();
 	include('config.php');
-	if(mysql_num_rows(mysql_query("SHOW TABLES")) != 0) {
+	if(mysql_num_rows(mysql_query("SELECT COUNT(*) FROM `info`")) != 0) {
+	
 		header("Location: index.php");
 	}
 	if (isset($_POST['developer_name']) && $_POST['developer_name'] != '' && isset($_POST['developer_mail']) && $_POST['developer_mail'] != '') {
@@ -122,4 +123,6 @@
 		</div>
 	</body>
 </html>
-<?php ob_end_flush(); ?>
+<?php
+	ob_end_flush();
+?>
