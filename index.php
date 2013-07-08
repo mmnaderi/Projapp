@@ -58,8 +58,8 @@
 				</div>
 				<div class="type"><?php
 					if ($projects['type'] == 'public') {
-						if($projects['file'] == $info['url'].'/public/') {
-							echo('<a href="#"><img src="admin/images/download.png" alt="'.$lang['public'].'" title="'.$lang['public'].'" />'.$lang['public'].'</a>');
+						if($projects['file'] == '') {
+							echo('<a href="#"><img src="admin/images/not-download.png" alt="'.$lang['public'].'" title="'.$lang['public'].'" /><span class="tooltip-bottom">'.$lang['public'].'</span></a>');
 						}
 						else {
 							echo('<a href="'. $info['url'] .'/public/'. $projects['file'] .'"><img src="admin/images/download.png" alt="'.$lang['public'].'" title="'.$lang['public'].'" /><span class="tooltip-bottom">'.$lang['public'].'['.$lang['download'].']'.'</span></a>');
