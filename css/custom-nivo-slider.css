@@ -1,0 +1,66 @@
+/*
+ * Note: Include the nivo-slider.css file that comes
+ * with the main download before including this file.
+ */
+
+#slideshow { position: relative; }
+
+.nivoSlider img {
+	display: none;
+	position: absolute;
+	height: 350px;
+	width: 900px;
+	z-index: 1;
+	}
+
+#slideshow a { border: 0; }
+
+.nivo-controlNav {
+	position: absolute;
+	left: 42%;
+	bottom: -2px;
+	width: 121px;
+	height: 7px;
+	padding: 10px 11px;
+	background: url(../images/snav.png) top center no-repeat;
+	z-index: 90;
+	}
+
+.nivo-controlNav a {
+	display: block;
+	width: 12px;
+	height: 12px;
+	background: url(../images/bullets.png) 0 0 no-repeat;
+	text-indent: -9999px;
+	border: 0;
+	margin: 0 4px;
+	float: left;
+	}
+
+.nivo-controlNav a.active { background-position: -12px 0; }
+
+.nivo-directionNav a {
+	display: block;
+	width: 50px;
+	height: 50px;
+	text-indent: -9999px;
+	border: 0;
+	-moz-opacity: .70;
+	opacity: .70;
+	z-index: 99;
+	}
+	
+a.nivo-nextNav {
+	background: url(../images/next.png) no-repeat;
+	right: 20px;
+	}
+	
+a.nivo-prevNav {
+	background: url(../images/prev.png) no-repeat;
+	left: 20px;
+	}
+
+.nivo-directionNav a:hover {
+	-moz-opacity: 1;
+	opacity: 1;
+	}
