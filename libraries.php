@@ -8,6 +8,17 @@
 	}
 	include_once('languages/'.$info['language'].'.pl');
 	
+	function check_included($filename) {
+		$included_files = get_included_files();
+		foreach ($included_files as $file) {
+			if($file == $filename) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
 	// echo this page when the Projapp wasn't installed
 	$not_installed = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

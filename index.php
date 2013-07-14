@@ -13,14 +13,14 @@
 		echo($not_installed);
 		exit;
 	}
-	
+
 	// include header of theme
 	include($themeurl.'/header.pt');
-	
+
 	// check if developer doesn't have any project
 	$rows = mysql_result(mysql_query("SELECT COUNT(*) FROM `projects`"), 0);
 	if(!$rows) { echo($lang['no_project']); }
-	
+
 	// start categories
 	$categories_query = mysql_query("SELECT * FROM `categories`");
 	while($categories = mysql_fetch_array($categories_query)) {
@@ -28,7 +28,7 @@
 	if($categories['name'] != 'Without Category') {
 		echo('<h2 class="category-title"><img src="admin/images/category.png" />'.$categories['name'].'</h2>');
 	}
-	
+
 	// start projects in any categories
 	$empty_category = mysql_result(mysql_query("SELECT * FROM `projects` WHERE `category`='".$categories['name']."'"), 0);
 	if (!$empty_category && $categories['name'] != 'Without Category') { echo("<span class=\"note\">{$lang['no_project_in_cat']}</span>"); }
@@ -37,7 +37,15 @@
 ?>
 			<li>
 				<span class="name"><?php
-					echo($counter.". ".$projects['name']);
+					include_once('languages/'.$info['language'].'.pl');
+					if($direction == 'rtl') {
+						echo(fa_digits($counter).". ".$projects['name']);
+						$project_percent = fa_digits($projects['percent']);
+					}
+					else {
+						echo($counter.". ".$projects['name']);
+						$project_percent = $projects['percent'];
+					}
 					$counter=$counter+1;
 				?></span>
 				<span class="description"><?php echo($projects['description']); ?></span>
@@ -54,7 +62,7 @@
 						echo('<a href="#"><img src="admin/images/indevelop.png" alt="'.$lang['in_develop'].'" title="'.$lang['in_develop'].'" /><span class="tooltip-bottom">'.$lang['in_develop'].'</span></a>');
 					}
 				?>
-					<div class="percent-text"><?php echo($projects['percent']); ?>%</div>
+					<div class="percent-text"><div class="progress" style="width:<?php echo($projects['percent']); ?>px"></div><div class="progress-text"><?php echo($project_percent); ?>%</div></div>
 				</div>
 				<div class="type"><?php
 					if ($projects['type'] == 'public') {
