@@ -8,7 +8,6 @@
 	ob_start();
 	include('config.php');
 	if(mysql_num_rows(mysql_query("SELECT COUNT(*) FROM `info`")) != 0) {
-	
 		header("Location: index.php");
 	}
 	if (isset($_POST['developer_name']) && $_POST['developer_name'] != '' && isset($_POST['developer_mail']) && $_POST['developer_mail'] != '') {
@@ -51,7 +50,7 @@
 	<body>
 		<div class="container">
 			<a href="index.php" title="Projapp"><img src="admin/images/logo-full.png" alt="Projapp" /></a>
-			<div class="wrapper">
+			<div class="wrapper-fix">
 				<div class="primary">
 				<h1 class="page-title"><font size="5">{</font>Install Projapp}</h1>
 				<form action="install.php" method="POST">
