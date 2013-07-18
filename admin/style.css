@@ -1,10 +1,10 @@
-﻿/*####### IN THE NAME OF ALLAH ##########
+/*####### IN THE NAME OF ALLAH ##########
 ## Project Name: Projapp               ##
 ## File name:    style.css             ##
 ## Author:       Mohammad Mahdi Naderi ##
 ## Project Site: projapp.mmnaderi.ir   ##
 #######################################*/
-@import "css/hint.min.css";
+
 * {
 	padding:0;
 	margin:0;
@@ -81,6 +81,14 @@ input[type="submit"]:hover {
 	border-radius:4px;
 	border:1px solid #CCC;
 	background:url('images/toolbar.png') repeat-y #FFF;
+	box-shadow: 0px 0px 5px rgb(180, 179, 175);
+	-webkit-box-shadow: 0px 0px 5px rgb(180, 179, 175);
+}
+.wrapper-fix {
+	min-height:271px;
+	border-radius:4px;
+	border:1px solid #CCC;
+	background:#FFF;
 	box-shadow: 0px 0px 5px rgb(180, 179, 175);
 	-webkit-box-shadow: 0px 0px 5px rgb(180, 179, 175);
 }
