@@ -29,9 +29,7 @@
 		<link href="admin/style.css" rel="stylesheet" type="text/css">
 	</head>
 	<body>
-	<div class="container wrapper small-wrapper">Please go to <a href="install.php">install page</a>.</div>
+	<div class="container wrapper-fix small-wrapper">Please go to <a href="install.php">install page</a>.</div>
 	</body>
 </html>';
-
-	
 ?>
