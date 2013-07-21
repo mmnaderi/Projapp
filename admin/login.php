@@ -37,7 +37,7 @@
 		<div class="container" style="width:250px;">
 			<div class="login-wrapper">
 				<!--<h1 class="page-title"><font size="5">{</font>Login}</h1>-->
-				<a href="<?php echo($info['url']); ?>/admin" title="Projapp"><img src="images/login-logo.png" style="background-color:<?php printf( "#%06X\n", mt_rand( 0, 0xFFFFFF )); ?>;margin-bottom:8px;" /></a>
+				<a href="<?php echo($info['url']); ?>/admin" title="Projapp"><img src="images/login-logo.png" style="margin-bottom:8px;" /></a>
 				<form action="login.php" method="POST">
 					<?php if (isset($_POST['request']) && $_POST['request'] == 'true') {?>
 					<p class="error login-message"><img src="images/error.png" alt="Error" />Username or password is incorrect.</p>
