@@ -10,7 +10,11 @@
 	if(mysql_num_rows(mysql_query("SELECT COUNT(*) FROM `info`")) != 0) {
 		header("Location: index.php");
 	}
-	if (isset($_POST['developer_name']) && $_POST['developer_name'] != '' && isset($_POST['developer_mail']) && $_POST['developer_mail'] != '') {
+	$posted = array();
+	foreach ( $_POST as $item_key => $item_value ) {
+		$posted[$item_key] = $item_value;
+	}
+	if (isset($posted['developer_name']) && $posted['developer_name'] != '' && isset($posted['developer_mail']) && $posted['developer_mail'] != '') {
 		mysql_query ('CREATE TABLE projects( '.
 			'`id` INT NOT NULL AUTO_INCREMENT,'.
 			'`name` TEXT NOT NULL, '.
@@ -35,7 +39,7 @@
 			'`theme` TEXT NOT NULL, '.
 			'`language` TEXT NOT NULL, '.
 			'PRIMARY KEY(id))');
-		$insertinfo = mysql_query ("INSERT INTO `info` (`id`,`url`,`username`,`password`,`developername`,`developermail`,`theme`,`language`) VALUES ('', 'http://".dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'])."','".$_POST['username']."','".md5($_POST['password'])."','".$_POST['developer_name']."','".$_POST['developer_mail']."','".$_POST['theme']."','".$_POST['language']."')");
+		$insertinfo = mysql_query ("INSERT INTO `info` (`id`,`url`,`username`,`password`,`developername`,`developermail`,`theme`,`language`) VALUES ('', 'http://".dirname($_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'])."','".$posted['username']."','".md5($posted['password'])."','".$posted['developer_name']."','".$posted['developer_mail']."','".$posted['theme']."','".$posted['language']."')");
 		$insertcategory = mysql_query ("INSERT INTO `categories` (`id`,`name`) VALUES ('','Without Category')");
 	}
 ?>

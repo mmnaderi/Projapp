@@ -9,12 +9,17 @@
 	@session_start();
 	include ('../config.php');
 	$query = mysql_query("SELECT * FROM `info`");
+	$posted = array();
+	foreach ( $_POST as $item_key => $item_value ) {
+		$posted[$item_key] = $item_value;
+	}
+	
 	while($info = mysql_fetch_array($query)) {
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
 	if (isset($_POST['request']) && $_POST['request'] == 'true') {
-		if ($_POST['username'] == $info['username'] && md5($_POST['password']) == $info['password']) {
-			$_SESSION['admin'] = $_POST['username'];
+		if ($posted['username'] == $info['username'] && md5( $posted['password'] ) == $info['password']) {
+			$_SESSION['admin'] = $posted['username'];
 		}
 	}
 	if(isset($_GET['act']) && $_GET['act'] == 'exit') {
