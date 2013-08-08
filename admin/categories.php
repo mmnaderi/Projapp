@@ -9,10 +9,15 @@
 	@session_start();
 	if(isset($_SESSION['admin'])) {
 	include ('../config.php');
-	if(isset($_POST['id']) && isset($_POST['name'])) {
-		$editcategory = mysql_query ("UPDATE `categories` SET `name`='".$_POST['name']."' WHERE `id`=". $_POST['id']);
+	$posted = array();
+	foreach ( $_POST as $item_key => $item_value ) {
+		$posted[$item_key] = $item_value;
+	}
+	
+	if(isset($posted['id']) && isset($posted['name'])) {
+		$editcategory = mysql_query ("UPDATE `categories` SET `name`='".$posted['name']."' WHERE `id`=". $posted['id']);
 		if($editcategory) {
-			echo($_POST['name']);
+			echo($posted['name']);
 		}
 		exit;
 	}
@@ -20,9 +25,9 @@
 	while($info = mysql_fetch_array($query)) {
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
-	if (isset($_POST['request']) && $_POST['request'] == 'true') {
-		if ($_POST['category_name'] != '') {
-			$addcategory = mysql_query ("INSERT INTO `categories` (`id`,`name`) VALUES ('', '". $_POST['category_name'] ."')");
+	if (isset($posted['request']) && $posted['request'] == 'true') {
+		if ($posted['category_name'] != '') {
+			$addcategory = mysql_query ("INSERT INTO `categories` (`id`,`name`) VALUES ('', '". $posted['category_name'] ."')");
 		}
 	}
 ?>
@@ -45,7 +50,7 @@
 					<h1 class="page-title"><font size="5">{</font>Categories List}</h1>
 					<?php if(isset($addcategory) && $addcategory) {?>
 					<p class="success"><img src="images/complete.png" alt="Complete" />Perfect! category was added.</p>
-					<?php } elseif (isset($_POST['request']) && $_POST['request'] == 'true') {?>
+					<?php } elseif (isset($posted['request']) && $posted['request'] == 'true') {?>
 					<p class="error"><img src="images/error.png" alt="Error" />Unfortunately There is an error to add category.</p>
 					<?php } ?>
 					<ul class="projects">
