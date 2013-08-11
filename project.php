@@ -10,10 +10,10 @@
 	
 	// include header of theme
 	include($themeurl.'/header.pt');
+	$getted = filter_injection( $_GET['id'] );
+	if(isset($getted) && $getted != '') {
 	
-	if(isset($_GET['id']) && $_GET['id'] != '') {
-	
-	$projects_query = mysql_query("SELECT * FROM `projects` WHERE `id`='".$_GET['id']."'");
+	$projects_query = mysql_query("SELECT * FROM `projects` WHERE `id`='".$getted."'");
 	while($project = mysql_fetch_array($projects_query)) {
 ?>
 	<h2 class="category-title"><?php echo($project['name']); ?></h2>

@@ -9,22 +9,26 @@
 	@session_start();
 	if(isset($_SESSION['admin'])) {
 	include ('../config.php');
+	$posted = array();
+	foreach ( $_POST as $item_key => $item_value ) {
+		$posted[$item_key] = $item_value;
+	}
 	$query = mysql_query("SELECT * FROM `info`");
 	while($info = mysql_fetch_array($query)) {
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
-	if (isset($_POST['request']) && $_POST['request'] == 'true') {
-		if ($_POST['project_name'] != '' && $_POST['project_description'] != '' && $_POST['progress_level'] != '') {
+	if (isset($posted['request']) && $posted['request'] == 'true') {
+		if ($posted['project_name'] != '' && $posted['project_description'] != '' && $posted['progress_level'] != '') {
 			if($_FILES['file']['name'] != '') { 
 				$file_query = "`file`='".$_FILES['file']['name']."', "; 
 			} else {
 				$file_query = "";
 			}
-			$editproject = mysql_query ("UPDATE `projects` SET `name`='".$_POST['project_name']."', `description`='". $_POST['project_description'] ."', `type`='". $_POST['project_type'] ."', `percent`='". $_POST['progress_level'] ."', ".$file_query.", `category`='".$_FILES['project_category'] ."', `content`='".$_FILES['content'] ."' WHERE `id`=". $_GET['id']);
-			if(isset($_POST['project_type']) && $_POST['project_type'] == 'public') {
+			$editproject = mysql_query ("UPDATE `projects` SET `name`='".$posted['project_name']."', `description`='". $posted['project_description'] ."', `type`='". $posted['project_type'] ."', `percent`='". $posted['progress_level'] ."', ".$file_query.", `category`='".$_FILES['project_category'] ."', `content`='".$_FILES['content'] ."' WHERE `id`=". $_GET['id']);
+			if(isset($posted['project_type']) && $posted['project_type'] == 'public') {
 				$target_path = "../public/";
 			}
-			elseif (isset($_POST['project_type'])) {
+			elseif (isset($posted['project_type'])) {
 				$target_path = "../private/";
 			}
 			
@@ -64,7 +68,7 @@
 					<h1 class="page-title"><font size="5">{</font>Edit Project}</h1>
 					<?php if(isset($editproject) && $editproject) {?>
 					<p class="success"><img src="images/complete.png" alt="Complete" />Perfect! project was edited.</p>
-					<?php } elseif (isset($_POST['request']) && $_POST['request'] == 'true') {?>
+					<?php } elseif (isset($posted['request']) && $posted['request'] == 'true') {?>
 					<p class="error"><img src="images/error.png" alt="Error" />Unfortunately There is an error to edit project.</p>
 					<?php } ?>
 					<?php

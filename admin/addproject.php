@@ -21,13 +21,17 @@
 	}
 	/////////////////////////////////////////////////////////////////////
 	if (isset($_POST['request']) && $_POST['request'] == 'true') {
-		if ($_POST['project_name'] != '' && $_POST['project_description'] != '' && $_POST['progress_level'] != '') {
-			if($_POST['progress_level'] > 100 || $_POST['progress_level'] < 0) {
+		$posted = array();
+		foreach ( $_POST as $item_key => $item_value ) {
+			$posted[$item_key] = $item_value;
+		}
+		if ($posted['project_name'] != '' && $posted['project_description'] != '' && $posted['progress_level'] != '') {
+			if($posted['progress_level'] > 100 || $posted['progress_level'] < 0) {
 				$message = "Please enter progress level between 0 and 100.";
 			}
 			else {
-			$addproject = mysql_query ("INSERT INTO `projects` (`id`,`name`,`description`,`type`,`percent`,`file`,`category`,`content`) VALUES ('', '". $_POST['project_name'] ."','". $_POST['project_description'] ."','". $_POST['project_type'] ."','". $_POST['progress_level'] ."','".$_FILES['file']['name']."','". $_POST['project_category'] ."','".$_POST['content']."')");
-			if(isset($_POST['project_type']) && $_POST['project_type'] == 'public') {
+			$addproject = mysql_query ("INSERT INTO `projects` (`id`,`name`,`description`,`type`,`percent`,`file`,`category`,`content`) VALUES ('', '". $posted['project_name'] ."','". $posted['project_description'] ."','". $posted['project_type'] ."','". $posted['progress_level'] ."','".$_FILES['file']['name']."','". $posted['project_category'] ."','".$posted['content']."')");
+			if(isset($posted['project_type']) && $posted['project_type'] == 'public') {
 				$target_path = "../public/";
 			}
 			else {
@@ -66,7 +70,7 @@
 					<?php } ?>
 					<?php if(isset($addproject) && $addproject) {?>
 					<p class="success"><img src="images/complete.png" alt="Complete" />Perfect! project was added.</p>
-					<?php } elseif (isset($_POST['request']) && $_POST['request'] == 'true') {?>
+					<?php } elseif (isset($posted['request']) && $posted['request'] == 'true') {?>
 					<p class="error"><img src="images/error.png" alt="Error" />Unfortunately There is an error to add project.</p>
 					<?php } ?>
 					<form enctype="multipart/form-data" action="addproject.php" method="POST">
