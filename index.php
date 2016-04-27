@@ -7,12 +7,6 @@
 	#########################################
 	include('config.php');
 	include('libraries.php');
-	
-	// check if Projapp not installed (in database isn't any table)
-	if(mysql_num_rows(mysql_query("SHOW TABLES")) == 0) {
-		echo($not_installed);
-		exit;
-	}
 
 	// include header of theme
 	include($themeurl.'/header.pt');

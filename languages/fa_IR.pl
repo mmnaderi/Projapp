@@ -1,7 +1,10 @@
 <?php
-$direction = 'rtl';
+$lang_name = 'Persian';
+$lang_code = 'fa_IR';
+$lang_dir = 'rtl';
+$lang_country = 'ir'; # to use in country flag
 $lang = array(
-	"no_project" => "{$info['developername']} پروژه‌ای ندارد.",
+	"no_project" => "پروژه‌ای وجود ندارد.",
 	"no_project_in_cat" => "در این دسته پروژه‌ای وجود ندارد.",
 	"public" => "عمومی",
 	"download" => "دانلود",

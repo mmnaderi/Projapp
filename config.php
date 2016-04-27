@@ -1,19 +1,23 @@
 ﻿<?php
-	######### IN THE NAME OF ALLAH ##########
-	## Project Name: Projapp               ##
-	## File name:    config.php            ##
-	## Author:       Mohammad Mahdi Naderi ##
-	## Project Site: projapp.mmnaderi.ir   ##
-	#########################################
+	## In the name of ALLAH
+	## Project Name: Projapp
+	## File:         config.php
+	## Author:       Mohammad Mahdi Naderi <mmnaderi.ir@gmail.com>
+	## Repository:   github.com/mmnaderi/Projapp
+
 	$dbhost = 'localhost';
 	$dbuser = 'root';
 	$dbpass = '';
 	$dbname = 'projapp';
 	/////////////////////////
-	error_reporting(0);
+	##############################################error_reporting(0);
+
+	//Return value : ?
 	$connect = mysql_connect($dbhost,$dbuser,$dbpass);
+
+	// Return value of mysql_select_db:	TRUE on success, FALSE on failure
 	$select = mysql_select_db($dbname,$connect);
-	
+
 	/**
 	 * Anti SQL Injection attacks
 	 * If paramater is an array, returns array or is an string, returns single string

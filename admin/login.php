@@ -1,11 +1,13 @@
 <?php
-	######### IN THE NAME OF ALLAH ##########
-	## Project Name: Projapp               ##
-	## File name:    login.php             ##
-	## Author:       Mohammad Mahdi Naderi ##
-	## Project Site: projapp.mmnaderi.ir   ##
-	#########################################
+	## In the name of ALLAH
+	## Project Name: Projapp
+	## File:         admin/login.php
+	## Author:       Mohammad Mahdi Naderi <mmnaderi.ir@gmail.com>
+	## Repository:   github.com/mmnaderi/Projapp
+
+	//Why I write this? Only God knows :D
 	ob_start();
+	
 	@session_start();
 	include ('../config.php');
 	$query = mysql_query("SELECT * FROM `info`");
@@ -13,7 +15,7 @@
 	foreach ( $_POST as $item_key => $item_value ) {
 		$posted[$item_key] = $item_value;
 	}
-	
+
 	while($info = mysql_fetch_array($query)) {
 	/////////////////////////////////////////////////////////////////////
 	/////////////////////////////////////////////////////////////////////
