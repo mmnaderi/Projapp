@@ -22,5 +22,5 @@ Having trouble with Projapp? Check out the documentation at http://projapp.mmnad
 
 > <strong>About Developer</strong><br/>
 Name: Mohammad Mahdi Naderi<br/>
-Mail: info [at] mmnaderi.ir<br/>
+Mail: mmnaderi.ir [at] gmail.com<br/>
 Website: http://mmnaderi.ir
