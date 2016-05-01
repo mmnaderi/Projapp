@@ -17,9 +17,6 @@ $dbname = 'projapp';   ← Type The DataBase Name
 </code></pre>
 5. Goto ```install.php``` file in main directory & install Projapp.
 
-## Support or Contact
-Having trouble with Projapp? Check out the documentation at http://projapp.mmnaderi.ir/codex.php or contact info [at] mmnaderi.ir.
-
 > <strong>About Developer</strong><br/>
 Name: Mohammad Mahdi Naderi<br/>
 Mail: mmnaderi.ir [at] gmail.com<br/>
