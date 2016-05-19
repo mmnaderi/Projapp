@@ -6,7 +6,7 @@ The Project Management
 Projapp is a web application that you can use it for show your portfolio & projects. With this application you can publish your free & premium products and you can show status of your projects progress to other people.
 
 ## Installation
-1. First download the latest version of Projapp from Github or <http://projapp.mmnaderi.ir>.
+1. First download the latest version of Projapp from Github.
 2. Then upload & extract Projapp files.
 3. Create database.
 4. Edit ```config.php``` in main directory. Find this section in file and edit this:
@@ -18,6 +18,6 @@ $dbname = 'projapp';   ← Type The DataBase Name
 5. Goto ```install.php``` file in main directory & install Projapp.
 
 > <strong>About Developer</strong><br/>
-Name: Mohammad Mahdi Naderi<br/>
-Mail: mmnaderi.ir [at] gmail.com<br/>
-Website: http://mmnaderi.ir
+name: Mohammad Mahdi Naderi<br/>
+mail: mmnaderi.ir [at] gmail.com<br/>
+website: http://mmnaderi.ir
